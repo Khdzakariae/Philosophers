@@ -1,5 +1,5 @@
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
+FLAGS = -Wall -Wextra -Werror
 NAME = so_long.a
 
 SRC_1_2	 =	test.c key_press.c pixel_put.c
@@ -9,10 +9,10 @@ OBJ = $(SRC_1_2:.c=.o)
 all: $(NAME)
 
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(FLAGS) -o $(NAME)
+	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 clean:
 	rm -f $(OBJ) 
