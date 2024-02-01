@@ -4,10 +4,11 @@
 #include "mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <X11/keysym.h>
 
-#define HEIGHT  800
-#define WIDTH   290
-#define EMOGE  "pictures/kkk.xpm"
+#define HEIGHT  1080
+#define WIDTH   720
+#define EMOGE  "pictures/pacman.xpm"
 #define SPACE  "pictures/space.xpm"
 #define WALL   "pictures/wall.xpm"
 typedef struct s_data {
@@ -16,7 +17,14 @@ typedef struct s_data {
     int player_x;
     int player_y;
 } t_data;
-
+char map[7][19] = {
+    "1111111111111111111",
+    "11000P0000000000001",
+    "1001111111101111101",
+    "1001000000000000101",
+    "1001111111100111101",
+    "1000000000000000001",
+    "1111111111111111111"};
 // typedef struct
 // {
 //     void *mlx;
@@ -25,10 +33,6 @@ typedef struct s_data {
 //     int player_y;
 // } t_data;
 
-int handle_mouse_click(int button, int x, int y);
-int down_mousse(int button, int x, int y, t_data *data);
-void draw_player(t_data *data);
-int key_press(int keycode, t_data *data);
 
 
 #endif
