@@ -6,9 +6,10 @@
 #include <stdlib.h>
 
 #define HEIGHT  800
-#define WIDTH   300
-#define EMOGE  "/nfs/homes/zel-khad/Desktop/so_long/so_long/pacman.xpm"
-#define SPACE  "/nfs/homes/zel-khad/Desktop/so_long/so_long/space.xpm"
+#define WIDTH   290
+#define EMOGE  "pictures/kkk.xpm"
+#define SPACE  "pictures/space.xpm"
+#define WALL   "pictures/wall.xpm"
 typedef struct s_data {
     void *mlx;
     void *win;

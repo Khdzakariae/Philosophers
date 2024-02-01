@@ -1,22 +1,23 @@
 #include "so_long.h"
 
-char map[5][13] = {
-    "1111111111111",
-    "1100000000001",
-    "10p0111111001",
-    "1000010000011",
-    "1111111111111"};
+char map[7][19] = {
+    "1111111111111111111",
+    "11p0000000000000001",
+    "1001111111101111101",
+    "1001000000000000101",
+    "1001111111100111101",
+    "1000000000000000001",
+    "1111111111111111111"};
 
-char *s = "/nfs/homes/zel-khad/Desktop/so_long/so_long/7ayt.xpm";
 
-while(map[i])
-{
-    while(map[i][j])
-    {
+// while(map[i])
+// {
+//     while(map[i][j])
+//     {
         
-    }
+//     }
 
-}
+// }
 
 
 void draw_player(t_data *data)
@@ -27,10 +28,10 @@ void draw_player(t_data *data)
     int img_width = 5;
     int img_height = 5;
 
-    while (i < 5)
+    while (i < 7)
     {
         j = 0;
-        while (j < 13)
+        while (j < 19)
         {
             if (map[i][j] == 'p')
             {
@@ -40,7 +41,7 @@ void draw_player(t_data *data)
             }
             else if (map[i][j] == '1')
             {
-                img = mlx_xpm_file_to_image(data->mlx, s, &img_width, &img_height);
+                img = mlx_xpm_file_to_image(data->mlx, WALL, &img_width, &img_height);
                 if (img != NULL)
                     mlx_put_image_to_window(data->mlx, data->win, img, j * img_width, i * img_height);
                 else
