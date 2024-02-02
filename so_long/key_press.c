@@ -1,26 +1,24 @@
 #include "so_long.h"
 
 
-int key_press(int keycode, t_data *data)
+int key_hook(int keysym, t_data *data)
 {
-
-
-
-    return (0);
-}
-
-int down_mousse(int button, int x, int y, t_data *data)
-{
-    (void)x;
-    (void)y;
-    printf("boton %d\n", button);
-    if (button == 1958883080 || button == 658865048)
+    if (keysym == XK_Escape)
     {
-        exit(0);
         mlx_clear_window(data->mlx, data->win);
         mlx_destroy_window(data->mlx, data->win);
         free(data->mlx);
+        exit(1);
     }
-    
-    return (0);
+
+    else if (keysym == 65361 ||keysym == 97) 
+       move_player(data, data->player_x, data->player_y - 1);
+    else if (keysym == 65363 ||keysym == 100)
+        move_player(data, data->player_x, data->player_y + 1);
+    else if (keysym == 65364 ||keysym == 115)
+       move_player(data, data->player_x + 1, data->player_y);
+    else if (keysym == 65362 ||keysym == 1159)
+       move_player(data, data->player_x - 1, data->player_y);
+
+    return 0;
 }

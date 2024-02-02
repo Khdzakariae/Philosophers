@@ -2,7 +2,7 @@
 FLAGS = -Wall -Wextra -Werror
 NAME = so_long.a
 
-SRC_1_2	 =	test.c 
+SRC_1_2	 =	so_long.c 
 
 
 OBJ = $(SRC_1_2:.c=.o)

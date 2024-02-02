@@ -1,16 +1,18 @@
 #include "so_long.h"
 
-int ft_check_collective(char map[7][19])
+void ft_position_player(int *x, int *y)
 {
     for (int i = 0; i < 7; i++)
     {
         for (int j = 0; j < 19; j++)
         {
-            if (map[i][j] == 'C')
+            if (map[i][j] == 'P')
             {
-                return 0;
+                *x = i;
+                *y = j;
+                return;
             }
         }
     }
-    return 1;
 }
+
