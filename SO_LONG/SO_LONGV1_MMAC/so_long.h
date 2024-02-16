@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:25:17 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/15 10:43:32 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:22:06 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@
 # define ANSI_COLOR_BLUE "\x1b[34m"
 # define ANSI_STYLE_ITALIC "\x1b[3m"
 
-# define HEIGHT 1000
-# define WIDTH 290
-
-# define HEIGHT_MAP 24
-# define WIDTH_MAP 7
 # define EMOGE "pictures1/kkkk.xpm"
 # define SPACE "pictures1/space.xpm"
 # define WALL "pictures1/wall.xpm"
