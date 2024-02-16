@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:13:05 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/16 09:42:57 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:00:38 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ void	game_over(t_data *data, char target)
 {
 	if (target != 'Z')
 		return ;
-	
 	ft_putendl_fd(ANSI_COLOR_RED "GAME OVER !", 2);
 	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_display(data->mlx);
 	free_(data->map);
 	free(data->mlx);
 	exit(EXIT_FAILURE);
@@ -71,7 +69,6 @@ void	booyah(t_data *data, char target)
 		return ;
 	write(1, ANSI_COLOR_GREEN "BRAVOOOOO !!", 18);
 	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_display(data->mlx);
 	free_(data->map);
 	free(data->mlx);
 	exit(EXIT_SUCCESS);

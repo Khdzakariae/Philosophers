@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:51:05 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/15 10:11:49 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:00:14 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	handle_destroy_notify(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_display(data->mlx);
 	free_(data->map);
 	free(data->mlx);
 	exit(1);
@@ -26,7 +25,6 @@ int	key_hook(int keysym, t_data *data)
 	if (keysym == 65307)
 	{
 		mlx_destroy_window(data->mlx, data->win);
-		mlx_destroy_display(data->mlx);
 		free_(data->map);
 		free(data->mlx);
 		exit(1);

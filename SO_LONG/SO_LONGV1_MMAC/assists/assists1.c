@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 09:58:26 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/16 10:24:38 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:54:38 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	move_player(t_data *data, int px, int py)
 	char		*number;
 
 	number = ft_itoa(moved);
-	number_of_moved = ft_calloc(30 , sizeof(char));
+	number_of_moved = ft_calloc(30, sizeof(char));
 	ft_strcat(number_of_moved, "number of movements ..");
 	ft_strcat(number_of_moved, number);
 	free(number);
