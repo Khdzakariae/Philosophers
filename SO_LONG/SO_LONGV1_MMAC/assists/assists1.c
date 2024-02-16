@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 09:58:26 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/14 22:14:29 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:24:38 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,8 @@ void	move_player(t_data *data, int px, int py)
 	char		*number_of_moved;
 	char		*number;
 
-	if (fork() == 0)
-	{
-		system("afplay /Users/zel-khad/Downloads/moved.wav");
-		system("killall afplay");
-	}
 	number = ft_itoa(moved);
-	number_of_moved = ft_calloc(30, sizeof(char));
+	number_of_moved = ft_calloc(30 , sizeof(char));
 	ft_strcat(number_of_moved, "number of movements ..");
 	ft_strcat(number_of_moved, number);
 	free(number);
@@ -92,4 +87,5 @@ void	move_player(t_data *data, int px, int py)
 	booyah(data, data->map[px][py]);
 	update_player(data, px, py, &moved);
 	draw_player(data, number_of_moved);
+	free(number_of_moved);
 }

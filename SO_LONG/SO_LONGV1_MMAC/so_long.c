@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 19:04:36 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/14 22:17:44 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/16 09:47:13 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ int	main(int ac, char **av)
 				count_map_line(data.map) * 42, "SO_LONG");
 		draw_player(&data, "number of moved 0...");
 		mlx_key_hook(data.win, key_hook, &data);
+		puts("kkk\n\n\n\n\n\n\n\n\n\n");
 		mlx_hook(data.win, 17, 0, handle_destroy_notify, &data);
 		mlx_loop(data.mlx);
 		mlx_destroy_window(data.mlx, data.win);
 		free_(data.map);
+		free_(data.tmp_map);
 		return (EXIT_SUCCESS);
 	}
 	write(1, ANSI_COLOR_YELLOW "ENTRER UNE MAP .. !", 24);
