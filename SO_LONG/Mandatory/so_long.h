@@ -6,7 +6,7 @@
 /*   By: useraccount <useraccount@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:25:17 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/17 12:06:29 by useraccount      ###   ########.fr       */
+/*   Updated: 2024/02/17 13:21:00 by useraccount      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int			cheack_map(char **map);
 void		ft_strlcpy1(char **dst, char **src, size_t colon, size_t line);
 
 void		flood_fill(char **map, int pos_x, int pos_y);
-void		draw_player(t_data *data, char *moved);
+void		draw_player(t_data *data);
 void		move_player(t_data *data, int px, int py);
 
 #endif
