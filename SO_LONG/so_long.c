@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: useraccount <useraccount@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 19:04:36 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/17 10:48:09 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/17 11:22:24 by useraccount      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, count_map_colone(data.map) * 42,
 			count_map_line(data.map) * 42, "SO_LONG");
-	draw_player(&data, "number of moved 0...");
+	draw_player(&data, "number of moved ..|0|");
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, 17, 0, handle_destroy_notify, &data);
 	system("leaks so_long");

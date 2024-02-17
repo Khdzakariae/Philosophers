@@ -1,5 +1,5 @@
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror 
 NAME = so_long
 
 SRC_1_2	 =	so_long.c assists/itoa.c assists/assists2.c assists/assists1.c prasin/parssin.c prasin/parssin2.c \
@@ -22,7 +22,7 @@ $(PRINTF) :
 	@$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 $(NAME): $(OBJ)
-	@$(CC) $(OBJ) $(LIBFT) $(PRINTF)  -g3 -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@$(CC) $(OBJ) $(LIBFT) $(PRINTF)  -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit -o $(NAME)
 	@echo "SO_LONG DONE [🤡]"
 clean:
 	@echo "CLEAN DONE [✅]"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: useraccount <useraccount@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:42:55 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/17 10:51:48 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/17 11:15:13 by useraccount      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	display_frame(t_data *data, char *assets, int i, int j)
 
 	data->sprint = mlx_xpm_file_to_image(data->mlx, assets, &images_size,
 			&images_size);
+	if (!data->sprint)
+		return ;
 	mlx_put_image_to_window(data->mlx, data->win, data->sprint, j * 42, i * 42);
 	mlx_destroy_image(data->mlx, data->sprint);
 }
