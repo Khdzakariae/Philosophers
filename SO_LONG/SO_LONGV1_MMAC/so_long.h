@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:25:17 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/16 11:22:06 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:24:48 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include "libft/libft.h"
+# include "ft_printf/ft_printf.h"
 # include <errno.h>
 # include <mlx.h>
 # include <stdbool.h>

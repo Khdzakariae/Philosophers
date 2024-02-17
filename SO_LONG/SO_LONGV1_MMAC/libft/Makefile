@@ -13,7 +13,7 @@ SRC_1_2	 =	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_s
 OBJ = $(SRC_1_2:.c=.o)
 
 all: $(NAME)
-	@echo "LIB DONE ✅"
+	@echo "LIBFT DONE ✅"
 
 %.o : %.c
 	@cc $(FLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 22:13:05 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/16 11:00:38 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:31:15 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	update_player(t_data *data, int px, int py, int *moved_number)
 {
 	if (!(data->map[px][py] != '1' && data->map[px][py] != 'E'))
 		return ;
-	printf("number of movements ..|%d|\n", *moved_number);
+	ft_printf("number of movements ..|%d|\n", *moved_number);
 	data->map[data->player_x][data->player_y] = '0';
 	data->map[px][py] = 'P';
 	data->player_x = px;
