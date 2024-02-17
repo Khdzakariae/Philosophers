@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 19:04:36 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/16 11:10:02 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:48:09 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int ac, char **av)
 	draw_player(&data, "number of moved 0...");
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, 17, 0, handle_destroy_notify, &data);
+	system("leaks so_long");
 	mlx_loop(data.mlx);
 	mlx_destroy_window(data.mlx, data.win);
 	free_(data.map);

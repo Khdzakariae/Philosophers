@@ -22,7 +22,7 @@ $(PRINTF) :
 	@$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 $(NAME): $(OBJ)
-	@$(CC) $(OBJ) $(LIBFT) $(PRINTF) -fsanitize=address -g3 -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@$(CC) $(OBJ) $(LIBFT) $(PRINTF)  -g3 -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	@echo "SO_LONG DONE [🤡]"
 clean:
 	@echo "CLEAN DONE [✅]"
