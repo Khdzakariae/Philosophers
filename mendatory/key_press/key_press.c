@@ -4,9 +4,8 @@ int	handle_destroy_notify(t_data *data)
 {
 	write(1, ANSI_COLOR_YELLOW "THE GMAE IS OVER", 21);
 	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_display( data->mlx);
 	free_(data->map);
-	free(data->mlx);
+    system("leaks so_long");
 	exit(1);
 }
 
@@ -16,9 +15,8 @@ int	key_hook(int keysym, t_data *data)
 	{
 		write(1, ANSI_COLOR_YELLOW "THE GMAE IS OVER", 21);
 		mlx_destroy_window(data->mlx, data->win);
-		mlx_destroy_display( data->mlx);
 		free_(data->map);
-		free(data->mlx);
+        system("leaks so_long");
 		exit(1);
 	}
 	if (keysym == 123 || keysym == 0)

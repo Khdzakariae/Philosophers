@@ -44,7 +44,7 @@ void	booyah(t_data *data, char target)
 	write(1, ANSI_COLOR_GREEN "BRAVOOOOO !!", 18);
 	mlx_destroy_window(data->mlx, data->win);
 	free_(data->map);
-	free(data->mlx);
+	system("leaks so_long");
 	exit(EXIT_SUCCESS);
 }
 

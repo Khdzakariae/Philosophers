@@ -1,4 +1,3 @@
-
 #include "../so_long.h"
 
 void	free_(char **map)
@@ -25,15 +24,15 @@ int	read_map(t_data *data, char *map)
 	ret = NULL;
 	k = open(map, O_RDONLY);
 	if (k == -1)
-	{
-		write(1, ANSI_COLOR_RED "ENTRER MAP VALID !", 24);
-		return (0);
-	}
+		return (write(1, ANSI_COLOR_RED "ENTRER MAP VALID !", 24), 0);
 	while (1)
 	{
 		s = get_next_line(k);
-		if (!s)
+		if (*s == '\n' || !s)
+		{
+			free(s);
 			break ;
+		}
 		ret = ft_strjoin(ret, s);
 		free(s);
 	}
@@ -44,6 +43,7 @@ int	read_map(t_data *data, char *map)
 	free(ret);
 	return (close(k), 1);
 }
+
 char	*ft_strcat(char *dest, char *src)
 {
 	int	i;
