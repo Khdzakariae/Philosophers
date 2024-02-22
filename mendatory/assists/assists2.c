@@ -42,9 +42,10 @@ void	booyah(t_data *data, char target)
 	if (!(target == 'E' && ft_check_collective(data->map)))
 		return ;
 	write(1, ANSI_COLOR_GREEN "BRAVOOOOO !!", 18);
-	mlx_destroy_window(data->mlx, data->win);
 	free_(data->map);
-	system("leaks so_long");
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 	exit(EXIT_SUCCESS);
 }
 
