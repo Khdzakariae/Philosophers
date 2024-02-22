@@ -19,7 +19,6 @@ int	read_map(t_data *data, char *map)
 {
 	int		k;
 	char	*s ;
-	s = NULL;
 	char	*ret;
 
 	ret = NULL;
@@ -29,12 +28,7 @@ int	read_map(t_data *data, char *map)
 	while (1)
 	{
 		s = get_next_line(k);
-		if (*s == '\n')
-		{
-			free(s);
-			break;
-		}
-		if (!s  ||*s == '\0')
+		if (!s  ||*s == '\0' || *s == '\n')
 		{
 			free(s);
 			break ;
@@ -43,11 +37,7 @@ int	read_map(t_data *data, char *map)
 		free(s);
 	}
 	if (!ret)
-	{
-		free(ret);
-		free(s);
 		return (write(1, ANSI_COLOR_RED "FILLE VIDE !!", 20), 0);
-	}
 	data->map = ft_split(ret, 10);
 	data->tmp_map = ft_split(ret, 10);
 	free(ret);
