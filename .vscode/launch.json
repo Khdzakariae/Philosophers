@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/zel-khad/Desktop/SO_LONG/SO_LONG/SO_LONGV1_MMAC",
-      "program": "/Users/zel-khad/Desktop/SO_LONG/SO_LONG/SO_LONGV1_MMAC/build/Debug/outDebug"
+      "cwd": "/Users/zel-khad/Desktop/ziko/mendatory/assists",
+      "program": "/Users/zel-khad/Desktop/ziko/mendatory/assists/build/Debug/outDebug"
     }
   ]
 }
