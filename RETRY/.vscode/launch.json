@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/zel-khad/Desktop/ziko/RETRY",
+      "program": "/Users/zel-khad/Desktop/ziko/RETRY/build/Debug/outDebug"
+    }
+  ]
+}

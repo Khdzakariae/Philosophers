@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:25:17 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/26 12:21:30 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:02:10 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define ANSI_COLOR_BLUE "\x1b[34m"
 # define ANSI_STYLE_ITALIC "\x1b[3m"
 
-# define EMOGE "pictures1/kkkk.xpm"
+# define EMOGE "picture.xpm"
 # define SPACE "pictures1/space.xpm"
 # define WALL "pictures1/wall.xpm"
 # define PIZZA "pictures1/pizza.xpm"

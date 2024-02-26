@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 09:58:26 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/02/26 12:24:48 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:54:20 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	read_map(t_data *data, char *map)
 	if (k == -1)
 		return (write(1, ANSI_COLOR_RED "ENTRER MAP VALID !", 24), 0);
 	s = get_next_line(k);
-	if (s[0] != '1')
-		exit(10);
+	if (!s)
+		return (write(1, ANSI_COLOR_RED "FILLE VIDE !!", 20), 0);
 	while (s)
 	{
 		if (ft_check_len1(s))
@@ -48,8 +48,6 @@ int	read_map(t_data *data, char *map)
 		free(s);
 		s = get_next_line(k);
 	}
-	if (!ret)
-		return (write(1, ANSI_COLOR_RED "FILLE VIDE !!", 20), 0);
 	data->map = ft_split(ret, 10);
 	data->tmp_map = ft_split(ret, 10);
 	free(ret);
