@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: useraccount <useraccount@student.42.fr>    +#+  +:+       +#+        */
+/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:41:23 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/05/23 15:13:38 by useraccount      ###   ########.fr       */
+/*   Updated: 2024/05/23 17:02:37 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,23 @@ long	the_time(void)
 
 void print_msg(int flag, t_philo *philo, bool flage) 
 {
+    
     pthread_mutex_lock(&philo->data->print_mutex);
-    long long time = the_time() - philo->data->start_time;
-    if (philo->data->philosopher_died == true) {
+    long long time = the_time();
+    if ((cheaak_died(philo) == true) && philo->data->mat == 0) 
+    {
+    pthread_mutex_unlock(&philo->data->philosopher_died_mutex);
+        philo->data->mat = 1;
         printf("%lld\t%ld died\n", time, philo->id + 1);
-        pthread_mutex_unlock(&philo->data->print_mutex);
         return;
     }
-    if (flag == 0)
+    if (flag == 0 && cheaak_died(philo) == false)
         printf("%lld\t%ld has taken a fork\n", time, philo->id + 1);
-    else if (flag == 1)
+    else if (flag == 1 && cheaak_died(philo) == false)
         printf("%lld\t%ld is sleeping\n", time, philo->id + 1);
-    else if (flag == 2)
+    else if (flag == 2 && cheaak_died(philo) == false)
         printf("%lld\t%ld is thinking\n", time, philo->id + 1);
-    else if (flag == 4)
+    else if (flag == 4 && cheaak_died(philo) == false)
         printf("%lld\t%ld is eating\n", time, philo->id + 1);
     pthread_mutex_unlock(&philo->data->print_mutex);
 
