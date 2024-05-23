@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:41:23 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/05/23 17:02:37 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:17:43 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ long	the_time(void)
 void print_msg(int flag, t_philo *philo, bool flage) 
 {
     
-    pthread_mutex_lock(&philo->data->print_mutex);
+    pthread_mutex_lock(philo->data->print_mutex);
     long long time = the_time();
-    if ((cheaak_died(philo) == true) && philo->data->mat == 0) 
+    if ((cheaak_died(philo) == true) ) 
     {
-    pthread_mutex_unlock(&philo->data->philosopher_died_mutex);
-        philo->data->mat = 1;
+         pthread_mutex_unlock(philo->data->print_mutex);
+
+        
         printf("%lld\t%ld died\n", time, philo->id + 1);
         return;
     }
@@ -53,7 +54,7 @@ void print_msg(int flag, t_philo *philo, bool flage)
         printf("%lld\t%ld is thinking\n", time, philo->id + 1);
     else if (flag == 4 && cheaak_died(philo) == false)
         printf("%lld\t%ld is eating\n", time, philo->id + 1);
-    pthread_mutex_unlock(&philo->data->print_mutex);
+    pthread_mutex_unlock(philo->data->print_mutex);
 
 }
 
@@ -66,7 +67,7 @@ void ft_usleep(long time, t_data *data)
     {
         if ((the_time() - current_time) >= time)
             break;
-        usleep(10);
+        usleep(10 * 1000);
     }
 }
 void sleping(t_philo *philo)

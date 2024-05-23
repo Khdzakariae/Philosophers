@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:46:33 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/05/23 16:52:01 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/05/23 20:49:49 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,14 @@ typedef struct s_list
 	long long  start_time;
 	bool philosopher_died;
 	int mat;
-	pthread_mutex_t philosopher_died_mutex;
-	pthread_mutex_t _died;
-	pthread_mutex_t print_mutex;
-	pthread_mutex_t p_1;
+	pthread_mutex_t *_died;
+	pthread_mutex_t *print_mutex;
 
 }			t_data;
 
 typedef struct s_forks
 {
-	pthread_mutex_t	forks;
+	pthread_mutex_t	*forks;
 	int				id;	
 }	t_fork;
 
@@ -53,7 +51,8 @@ typedef struct s_philo
 	t_fork		*first_fork;
 	t_fork		*second_fork;
 	long	time_to_last_eat;
-	pthread_mutex_t time_mutex;
+
+	pthread_mutex_t *time_mutex;
 } t_philo;
 
 bool cheaak_died(t_philo *philo);

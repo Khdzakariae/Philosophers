@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:46:01 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/05/23 18:52:04 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:15:52 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 bool cheaak_died(t_philo *philo)
 {
-    pthread_mutex_lock(&philo->data->_died);
+    pthread_mutex_lock(philo->data->_died);
     if (philo->data->philosopher_died == true)
     {
-        pthread_mutex_unlock(&philo->data->_died);
+        pthread_mutex_unlock(philo->data->_died);
         return(true);
     }
-    pthread_mutex_unlock(&philo->data->_died);
+    pthread_mutex_unlock(philo->data->_died);
     return(false);
 }
 
@@ -42,7 +42,7 @@ int check_arguments(int argc, char **argv, t_data *data)
 t_fork* initialize_forks(int number_of_philosophers) 
 {
     int i = 0;
-    t_fork *forks = malloc(number_of_philosophers * sizeof(t_fork));
+    t_fork *forks = malloc((number_of_philosophers - 1) * sizeof(t_fork));
     if (forks == NULL) 
     {
         printf("Error: Memory allocation failed\n");
@@ -51,7 +51,8 @@ t_fork* initialize_forks(int number_of_philosophers)
     while (i < number_of_philosophers) 
     {
         forks[i].id = i;
-        pthread_mutex_init(&forks[i].forks, NULL);
+        forks[i].forks = malloc(sizeof(pthread_mutex_t));
+        pthread_mutex_init(forks[i].forks, NULL);
         i++;
     }
     return forks;
@@ -66,12 +67,12 @@ t_philo* initialize_philosophers(t_data *data, t_fork *forks)
         printf("Error: Memory allocation failed\n");
         return NULL;
     }
-    pthread_mutex_init(&data->print_mutex, NULL);
-    pthread_mutex_init(&data->philosopher_died_mutex, NULL);
-    pthread_mutex_init(&data->_died, NULL);
-    pthread_mutex_init(&data->p_1, NULL);
+    data->print_mutex =  malloc(sizeof(pthread_mutex_t));
+    data->_died =  malloc(sizeof(pthread_mutex_t));
     
-    
+    pthread_mutex_init(data->print_mutex, NULL);
+    pthread_mutex_init(data->_died, NULL);
+
     data->mat = 0;
     while (i < data->number_of_philosophers)
     {
@@ -79,7 +80,12 @@ t_philo* initialize_philosophers(t_data *data, t_fork *forks)
         philos[i].data = data;
         philos[i].time_to_last_eat = 0;
         philos[i].data->philosopher_died = false;
-        pthread_mutex_init(&philos[i].time_mutex, NULL);
+  
+        philos[i].time_mutex = malloc(sizeof(pthread_mutex_t));
+
+        
+        pthread_mutex_init(philos[i].time_mutex, NULL);
+        
         if (i == 0) 
         {
             philos[i].first_fork = &forks[0];
@@ -103,24 +109,31 @@ t_philo* initialize_philosophers(t_data *data, t_fork *forks)
 bool monitoring(t_philo *philos) 
 {
     int i;
-    while (cheaak_died(philos) == false) 
+    while (1) 
     {
         i = 0;
         while (i < philos->data->number_of_philosophers) 
         {
             long current_time = the_time();
-            pthread_mutex_lock(&philos->data->p_1);
-            if (philos->data->time_to_die < current_time - philos[philos->id].time_to_last_eat) 
+
+            pthread_mutex_lock(philos[i].time_mutex);
+            if (philos->data->time_to_die < current_time - philos[i].time_to_last_eat) 
             {
-                pthread_mutex_unlock(&philos[i].data->philosopher_died_mutex);
+                pthread_mutex_unlock(philos[i].time_mutex);
+
+                
+                pthread_mutex_lock(philos[i].data->_died);
                 philos[i].data->philosopher_died = true;
+                pthread_mutex_unlock(philos[i].data->_died);
    
                 print_msg(3, &philos[i], false);
 
-                pthread_mutex_unlock(&philos->data->p_1);
+                puts("last place!");
                 return false;
             }
-            pthread_mutex_unlock(&philos->data->p_1);
+
+            pthread_mutex_unlock(philos[i].time_mutex);
+
             i++;
         }
     }
@@ -130,26 +143,49 @@ bool monitoring(t_philo *philos)
 
 void *philosophers(void *arg) 
 {
+    pthread_mutex_t *print_mutex;
     t_philo *philo = (t_philo *)arg;
-    while (cheaak_died(philo) == false) 
+
+    
+    if (philo->id % 2) {
+        usleep(100);
+    }
+    
+    while (1) 
     {
-        if (cheaak_died(philo) == false)
-            thinking(philo);
-        pthread_mutex_lock(&philo->first_fork->forks);
+        // if (cheaak_died(philo) == false)
+        //     return NULL;
+        // if (cheaak_died(philo) == false)
+        
+        
+        pthread_mutex_lock(philo->data->_died);
+        if (philo->data->philosopher_died == true)
+        {
+            pthread_mutex_unlock(philo->data->_died);
+            fprintf(stderr, "threads %lu done by success", philo->id);
+            return NULL;
+        }
+        pthread_mutex_unlock(philo->data->_died);
+        
+        
+        thinking(philo);
+        pthread_mutex_lock(philo->first_fork->forks);
         if (cheaak_died(philo) == false)
             print_msg(0, philo, true);
-        pthread_mutex_lock(&philo->second_fork->forks);
+        pthread_mutex_lock(philo->second_fork->forks);
         if (cheaak_died(philo) == false)
             print_msg(0, philo, true);
         if (cheaak_died(philo) == false)
             print_msg(4, philo, true);
         ft_usleep(philo->data->time_to_eat, philo->data);
-        pthread_mutex_lock(&philo->time_mutex);
-        philo[philo->id].time_to_last_eat = the_time();
-        pthread_mutex_unlock(&philo->time_mutex);
-        pthread_mutex_unlock(&philo->second_fork->forks);
-        pthread_mutex_unlock(&philo->first_fork->forks);
+        pthread_mutex_lock(philo->time_mutex);
+        philo->time_to_last_eat = the_time();
+        pthread_mutex_unlock(philo->time_mutex);
+        
+        pthread_mutex_unlock(philo->second_fork->forks);
+        pthread_mutex_unlock(philo->first_fork->forks);
         sleping(philo);
+ 
     }
     return NULL;
 }
@@ -157,7 +193,7 @@ void *philosophers(void *arg)
 
 bool start_simulation(t_data *data, t_philo *philos) 
 {
-    int i = 0;
+    int i =0;
     start_time(true);
     data->start_time = the_time();
 
@@ -166,15 +202,11 @@ bool start_simulation(t_data *data, t_philo *philos)
         pthread_create(&philos[i].thread_philo, NULL, philosophers, &philos[i]);
         i++;
     }
+    
     if (monitoring(philos) == false) {
         return false;
     }
-    i = 0; // Reset i to 0 to join all threads
-    while (i < data->number_of_philosophers) 
-    {
-        pthread_join(philos[i].thread_philo, NULL);
-        i++;
-    }
+
     return true;
 }
 
@@ -186,9 +218,16 @@ void cleanup(t_fork *forks, t_philo *philos, int number_of_philosophers)
 
     while (i < number_of_philosophers) 
     {
-        pthread_mutex_destroy(&forks[i].forks);
+        pthread_mutex_destroy(forks[i].forks);
+        pthread_mutex_destroy(philos[i].time_mutex);
+        free(philos[i].time_mutex);
         i++;
     }
+    pthread_mutex_destroy(philos->data->_died);
+    pthread_mutex_destroy(philos->data->print_mutex);
+
+    
+
     free(forks);
     free(philos);
 }
@@ -214,11 +253,10 @@ int main(int argc, char **argv)
     if (start_simulation(&data, philos) == false) 
     {
 
-        puts("naa hna");
-        // cleanup(forks, philos, data.number_of_philosophers);
+        usleep(200);
+        puts("naa hna");     
         return 1;
     }
-    cleanup(forks, philos, data.number_of_philosophers);
     return 0;
 }
 
