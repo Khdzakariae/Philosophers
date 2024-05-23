@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: useraccount <useraccount@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:41:23 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/05/23 14:04:33 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:13:38 by useraccount      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,13 @@ long	the_time(void)
 }
 
 
-void print_msg(int flag, t_philo *philo, bool flage)
+void print_msg(int flag, t_philo *philo, bool flage) 
 {
-
+    pthread_mutex_lock(&philo->data->print_mutex);
     long long time = the_time() - philo->data->start_time;
-    pthread_mutex_lock(philo->data->print_mutex);
-    pthread_mutex_lock(philo->data->died_);
-    if (flage == false)
-    {
+    if (philo->data->philosopher_died == true) {
         printf("%lld\t%ld died\n", time, philo->id + 1);
+        pthread_mutex_unlock(&philo->data->print_mutex);
         return;
     }
     if (flag == 0)
@@ -52,9 +50,11 @@ void print_msg(int flag, t_philo *philo, bool flage)
         printf("%lld\t%ld is thinking\n", time, philo->id + 1);
     else if (flag == 4)
         printf("%lld\t%ld is eating\n", time, philo->id + 1);
-    pthread_mutex_unlock(philo->data->print_mutex);
+    pthread_mutex_unlock(&philo->data->print_mutex);
 
 }
+
+
 
 void ft_usleep(long time, t_data *data)
 {
@@ -63,7 +63,7 @@ void ft_usleep(long time, t_data *data)
     {
         if ((the_time() - current_time) >= time)
             break;
-        usleep(100);
+        usleep(10);
     }
 }
 void sleping(t_philo *philo)

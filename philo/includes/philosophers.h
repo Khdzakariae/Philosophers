@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: useraccount <useraccount@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:46:33 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/05/23 14:11:28 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:11:40 by useraccount      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,13 @@ typedef struct s_list
 	long	time_to_sleep;
 	long long  start_time;
 	bool philosopher_died;
-	pthread_mutex_t *print_mutex;
-	pthread_mutex_t *died_;
-	
+	pthread_mutex_t philosopher_died_mutex;
+	pthread_mutex_t print_mutex;
 }			t_data;
-
 
 typedef struct s_forks
 {
-	pthread_mutex_t	*forks;
+	pthread_mutex_t	forks;
 	int				id;	
 }	t_fork;
 
@@ -51,7 +49,7 @@ typedef struct s_philo
 	t_fork		*first_fork;
 	t_fork		*second_fork;
 	long	time_to_last_eat;
-	pthread_mutex_t *time_mutex;
+	pthread_mutex_t time_mutex;
 } t_philo;
 
 void sleping(t_philo *philo);
