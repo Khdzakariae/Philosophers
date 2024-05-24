@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: useraccount <useraccount@student.42.fr>    +#+  +:+       +#+        */
+/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:46:01 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/05/24 11:06:05 by useraccount      ###   ########.fr       */
+/*   Updated: 2024/05/24 12:45:33 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,12 +167,10 @@ void *philosophers(void *arg)
         //     return NULL;
         // if (cheaak_died(philo) == false)
         
-        
         pthread_mutex_lock(philo->data->_died);
         if (philo->data->philosopher_died == true)
         {
             pthread_mutex_unlock(philo->data->_died);
-            fprintf(stderr, "threads %lu done by success", philo->id);
             return NULL;
         }
         pthread_mutex_unlock(philo->data->_died);
@@ -214,7 +212,6 @@ bool start_simulation(t_data *data, t_philo *philos)
     }
     if (monitoring(philos) == false) 
     {
-        join_threads(data, philos);
         return false;
     }
     return true;
@@ -270,4 +267,5 @@ int main(int argc, char **argv)
     }
     return 0;
 }
+
 

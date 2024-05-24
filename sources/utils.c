@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:41:23 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/05/23 21:17:43 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/05/24 11:39:33 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void print_msg(int flag, t_philo *philo, bool flage)
     long long time = the_time();
     if ((cheaak_died(philo) == true) ) 
     {
+                puts("================");
          pthread_mutex_unlock(philo->data->print_mutex);
-
-        
         printf("%lld\t%ld died\n", time, philo->id + 1);
         return;
     }
