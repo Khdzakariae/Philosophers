@@ -2,10 +2,11 @@ NAME = philo
 
 FLAGS = -Wall -Wextra -Werror
 
-INCLUDES = -I "/nfs/homes/zel-khad/Desktop/philo_nv/includes/"
+INCLUDES = -I "includes/"
 
 
-SRC_PHILO = sources/philosophers.c   sources/parse_argument.c sources/utils.c\
+SRC_PHILO = sources/philosophers.c   sources/parse_argument.c sources/utils.c sources/routine_philosofers.c\
+			sources/philosofeers_utils.c \
 
 
 all: $(NAME)

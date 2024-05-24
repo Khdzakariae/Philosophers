@@ -1,62 +1,43 @@
 #include "philo.h"
 
-t_forks* initialize_forks(int number_of_philosophers)
+long 	start_time(bool init)
 {
-    int i = 0;
+	static long	start = 0;
 
-    t_forks *forks = malloc((number_of_philosophers )* sizeof(t_forks));
-    //cheack is fail allocation
-    while (i < number_of_philosophers) 
-    {
-
-        forks[i].forks = malloc(sizeof(pthread_mutex_t));
-        //cheack is fail allocation
-        pthread_mutex_init(forks[i].forks, NULL);
-        i++;
-    }
-    return forks;
+	if (init)
+		start = the_time();
+	return (start);
 }
 
-t_philo* initialize_philosophers(t_data *data, t_forks *forks)
+long	the_time(void)
 {
-    int i = 0;
-    t_philo *philos = malloc((data->number_of_philosophers - 1)* sizeof(t_philo));
+	struct timeval	time;
+	long			start;
 
-    while (i < data->number_of_philosophers)
-    {
-        philos[i].id = i;
-        philos[i].data = data;
-        
-        if (i == 0) 
-        {
-            philos[i].first_fork = &forks[0];
-            philos[i].second_fork = &forks[data->number_of_philosophers - 1];
-        } 
-        else if (i % 2) 
-        {
-            philos[i].first_fork = &forks[i - 1];
-            philos[i].second_fork = &forks[i];
-        } 
-        else 
-        {
-            philos[i].first_fork = &forks[i];
-            philos[i].second_fork = &forks[i - 1];
-        }
-        i++;
-    }
-    return philos;
+	start = start_time(false);
+	gettimeofday(&time, NULL);
+	return ((long)(time.tv_sec * 1000 + time.tv_usec / 1000) - start);
 }
 
-void cleanup(t_philo *philo, t_forks *forks, int number_of_philosophers) 
+void ft_usleep(long time)
 {
-    int i = 0;
-
-    while (i < number_of_philosophers) 
+    long current_time = the_time();
+    while (1)
     {
-        pthread_mutex_destroy(forks[i].forks);
-        free(forks[i].forks);
-        i++;
+        if ((the_time() - current_time) >= time)
+            break;
+        usleep(10 * 1000);
     }
-    free(philo);
-    free(forks);
 }
+
+void sleping(t_philo *philo)
+{
+    print_msg(1, philo, true);
+    ft_usleep(philo->data->time_to_sleep);
+}
+
+void thinking(t_philo *philo)
+{
+	print_msg(2, philo, true);
+}
+
