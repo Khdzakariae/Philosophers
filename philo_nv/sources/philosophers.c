@@ -8,6 +8,7 @@ void join_threads(t_data *data, t_philo *philos)
         pthread_join(philos[i].thread_philo, NULL);
     }
 }
+
 int main(int argc, char **argv) 
 {
 

@@ -37,6 +37,7 @@ bool monitoring(t_philo *philos)
     }
     return true;
 }
+
 void *philosophers(void *arg) 
 {
     t_philo *philo = (t_philo *)arg;
