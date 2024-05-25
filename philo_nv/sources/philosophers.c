@@ -24,12 +24,11 @@ int main(int argc, char **argv)
     start_simulation(&data, philo);
     if  (monitoring(philo)== false) 
     {
-        join_threads(&data, philo);
-        puts("==================");
+
+        // join_threads(&data, philo);
         cleanup(philo, forks, data.number_of_philosophers);
         return 1;
     }
-    // join_threads(&data, philo);
     cleanup(philo, forks, data.number_of_philosophers);
     return(0);
 }
