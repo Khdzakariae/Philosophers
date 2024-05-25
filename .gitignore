@@ -1,0 +1,10 @@
+
+*.dSYM
+
+*.o
+
+*.a
+
+*.DS_Store
+
+*Contents
