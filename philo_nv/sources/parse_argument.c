@@ -58,6 +58,7 @@ bool	cheack(t_data *data, char **av)
 	data->time_to_sleep = ft_atoi(av[4]);
 	if (data->time_to_sleep > INT_MAX || data->time_to_sleep < 60)
 		return (false);
+	data->time_to_died = 0;
 	return (true);
 }
 

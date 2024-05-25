@@ -16,8 +16,8 @@ void cleanup(t_philo *philo, t_forks *forks, int number_of_philosophers)
 
 void print_msg(int flag, t_philo *philo, bool flage) 
 {
-    
     pthread_mutex_lock(&philo->data->print_mutex);
+
     long long time = the_time();
     if (flage == false)
     {
@@ -25,18 +25,26 @@ void print_msg(int flag, t_philo *philo, bool flage)
         printf("%lld\t%ld died\n", time, philo->id + 1);
         return;
     }
-    else if (flage == true)
+    if (flage == true)
     {
-        if (flag == 0)
-            printf("%lld\t%ld has taken a fork\n", time, philo->id + 1);
-        else if (flag == 1 )
-            printf("%lld\t%ld is sleeping\n", time, philo->id + 1);
-        else if (flag == 2)
-            printf("%lld\t%ld is thinking\n", time, philo->id + 1);
-        else if (flag == 4)
-            printf("%lld\t%ld is eating\n", time, philo->id + 1);
+        pthread_mutex_lock(&philo->data->_hbsso_l9lawi);
+        if (philo->data->philosopher_died == false)
+        {
+            pthread_mutex_unlock(&philo->data->_hbsso_l9lawi);
+            if (flag == 0 )
+                printf("%lld\t%ld has taken a fork\n", time, philo->id + 1);
+            else if (flag == 1 )
+                printf("%lld\t%ld is sleeping\n", time, philo->id + 1);
+            else if (flag == 2 )
+                printf("%lld\t%ld is thinking\n", time, philo->id + 1);
+            else if (flag == 4 )
+                printf("%lld\t%ld is eating\n", time, philo->id + 1);
+        }
+
     }
+    pthread_mutex_unlock(&philo->data->_hbsso_l9lawi);
     pthread_mutex_unlock(&philo->data->print_mutex);
+
 
 }
 
@@ -64,6 +72,8 @@ t_philo* initialize_philosophers(t_data *data, t_forks *forks)
     data->print_mutex =  *(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
     pthread_mutex_init(&data->print_mutex, NULL);
     pthread_mutex_init(&data->_died, NULL);
+    pthread_mutex_init(&data->_hbsso_l9lawi, NULL);
+
     while (i < data->number_of_philosophers)
     {
         philos[i].id = i;

@@ -20,15 +20,15 @@ bool monitoring(t_philo *philos)
         i = 0;
         while (i < philos->data->number_of_philosophers) 
         {
-            long current_time = the_time();
             pthread_mutex_lock(&philos[philos->id].time_mutex);
+            long current_time = the_time();
             if (philos->data->time_to_die < current_time - philos[philos->id].time_to_last_eat) 
             {
                 pthread_mutex_unlock(&philos[philos->id].time_mutex);
                 pthread_mutex_lock(&philos->data->_died);
                 philos->data->philosopher_died = true;
                 pthread_mutex_unlock(&philos->data->_died);
-                print_msg(3, &philos[philos->id], false);
+                print_msg(3, &philos[i], false);
                 return false;
             }
             pthread_mutex_unlock(&philos[philos->id].time_mutex);
@@ -43,12 +43,6 @@ void *philosophers(void *arg)
     int i ;
     while (1) 
     {
-        pthread_mutex_lock(&philo->data->_died);
-        if (philo->data->philosopher_died == true)
-        {
-            pthread_mutex_unlock(&philo->data->_died);
-            return NULL;
-        }
         pthread_mutex_unlock(&philo->data->_died);
         i = 0;
         while (i < philo->data->number_of_philosophers)
@@ -67,7 +61,8 @@ void *philosophers(void *arg)
             pthread_mutex_unlock(philo->first_fork->forks);
             sleping(philo);
             i++;
-        }         
+        }
+        usleep(10);        
 
     }
     return NULL;

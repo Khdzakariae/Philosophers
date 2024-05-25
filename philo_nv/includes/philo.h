@@ -13,6 +13,7 @@
 typedef struct s_data
 {
 	long	number_of_philosophers;
+	long	time_to_died;
 	long	time_to_die;
 	long	time_to_eat;
 	long	time_to_sleep;
@@ -20,6 +21,7 @@ typedef struct s_data
 	bool	philosopher_died;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	_died;
+	pthread_mutex_t _hbsso_l9lawi;
 
 
 }			t_data;
@@ -42,6 +44,7 @@ typedef struct s_philo
     
 } 				t_philo;
 
+bool cheaak_died(t_philo *philo);
 bool monitoring(t_philo *philos); 
 void sleping(t_philo *philo);
 void thinking(t_philo *philo);
