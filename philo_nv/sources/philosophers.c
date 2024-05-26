@@ -31,7 +31,8 @@ int main(int argc, char **argv)
     start_simulation(&data, philo);
     if  (monitoring(philo)== false) 
     {
-        join_threads(&data, philo);
+        if (data.number_of_philosophers != 1)
+            join_threads(&data, philo);
         // pthread_join(philos.thread_philo, NULL);
         
         cleanup(philo, forks, data.number_of_philosophers);
