@@ -10,7 +10,7 @@ SRC_PHILO = sources/philosophers.c   sources/parse_argument.c sources/utils.c so
 
 
 all: $(NAME)
-	@echo "philo done [ ✅ ]"
+	@echo "philo done by success [ ✅ ]"
 
 
 $(NAME): $(SRC_PHILO)
