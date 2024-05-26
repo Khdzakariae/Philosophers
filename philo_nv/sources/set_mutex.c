@@ -23,12 +23,10 @@ bool cheaak_died(t_philo *philo)
     return(true);
 }
 
-
 void set_time(t_philo *philo , int i)
 {
     pthread_mutex_lock(&philo->data->_hbsso_l9lawi);
-
-    philo[philo->id].time_to_last_eat = the_time();
+    philo->time_to_last_eat = the_time();
     pthread_mutex_unlock(&philo->data->_hbsso_l9lawi);
 }
 
@@ -36,14 +34,12 @@ bool cheack_time_died(t_philo *philos, int i)
 {
         pthread_mutex_lock(&philos->data->_hbsso_l9lawi);
         long current_time = the_time();
-        long dure = current_time - philos[philos->id].time_to_last_eat;
+        long dure = current_time - philos->time_to_last_eat;
         if (dure > philos->data->time_to_die)
         {
             pthread_mutex_unlock(&philos->data->_hbsso_l9lawi);
-
             return (false);
         }
         pthread_mutex_unlock(&philos->data->_hbsso_l9lawi);
-
         return(true);
 }       
