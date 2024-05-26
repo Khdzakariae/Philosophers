@@ -2,7 +2,7 @@ NAME = philo
 
 # FLAGS = -Wall -Wextra -Werror
 
-SRC_PHILO = sources/philosophers.c sources/ft_atoi.c  sources/argument_parser.c sources/utils.c\
+SRC_PHILO = test.c
 
 
 all: $(NAME)
@@ -10,7 +10,7 @@ all: $(NAME)
 
 
 $(NAME): $(SRC_PHILO)
-	@cc -fsanitize=thread -g3 $^  $(FLAGS) -o philo
+	@cc  $^  $(FLAGS) -o philo
 
 clean:
 	@echo "clean [ ✅ ]"
