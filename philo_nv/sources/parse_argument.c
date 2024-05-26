@@ -62,17 +62,18 @@ bool	cheack(t_data *data, char **av)
 	return (true);
 }
 
-int check_arguments(int argc, char **argv, t_data *data) 
+int	check_arguments(int argc, char **argv, t_data *data)
 {
-    if (argc != 5) 
-    {
-        printf("Usage: %s number_of_philosophers time_to_die time_to_eat time_to_sleep\n", argv[0]);
-        return 1;
-    }
-    if (!cheack(data, argv)) 
-    {
-        printf("ERROR\n");
-        return 1;
-    }
-    return 0;
+	if (argc != 5)
+	{
+		printf("Usage:%s \n",
+			argv[0]);
+		return (1);
+	}
+	if (!cheack(data, argv))
+	{
+		printf("ERROR\n");
+		return (1);
+	}
+	return (0);
 }
