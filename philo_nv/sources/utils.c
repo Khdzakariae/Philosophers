@@ -1,6 +1,6 @@
 #include "philo.h"
 
-long 	start_time(bool init)
+long	start_time(bool init)
 {
 	static long	start = 0;
 
@@ -19,25 +19,26 @@ long	the_time(void)
 	return ((long)(time.tv_sec * 1000 + time.tv_usec / 1000) - start);
 }
 
-void ft_usleep(long time)
+void	ft_usleep(long time)
 {
-    long current_time = the_time();
-    while (1)
-    {
-        if ((the_time() - current_time) >= time)
-            break;
+	long	current_time;
+
+	current_time = the_time();
+	while (1)
+	{
+		if ((the_time() - current_time) >= time)
+			break ;
 		// usleep(1);
-    }
+	}
 }
 
-void sleping(t_philo *philo)
+void	sleping(t_philo *philo)
 {
-    print_msg(1, philo, true);
-    ft_usleep(philo->data->time_to_sleep);
+	print_msg(1, philo, true);
+	ft_usleep(philo->data->time_to_sleep);
 }
 
-void thinking(t_philo *philo)
+void	thinking(t_philo *philo)
 {
 	print_msg(2, philo, true);
 }
-
