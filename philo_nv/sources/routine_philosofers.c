@@ -78,6 +78,7 @@ void  start_simulation(t_data *data, t_philo *philos)
     while (i < data->number_of_philosophers) 
     {
         pthread_create(&philos[i].thread_philo, NULL, philosophers, &philos[i]);
+        pthread_detach(philos[i].thread_philo);
         i++;
     }
 }
