@@ -44,6 +44,9 @@ typedef struct s_philo
     
 } 				t_philo;
 
+bool cheack_time_died(t_philo *philos, int i);
+void set_time(t_philo *philo , int i);
+void set_philo_died(t_philo *philo);
 bool cheaak_died(t_philo *philo);
 bool monitoring(t_philo *philos); 
 void sleping(t_philo *philo);

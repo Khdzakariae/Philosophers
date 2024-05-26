@@ -17,20 +17,20 @@ void cleanup(t_philo *philo, t_forks *forks, int number_of_philosophers)
 void print_msg(int flag, t_philo *philo, bool flage) 
 {
     pthread_mutex_lock(&philo->data->print_mutex);
-
+    //         puts("lock succes");
+    // sleep(1);
     long long time = the_time();
     if (flage == false)
     {
         pthread_mutex_unlock(&philo->data->print_mutex);
+        
         printf("%lld\t%ld died\n", time, philo->id + 1);
         return;
     }
     if (flage == true)
     {
-        pthread_mutex_lock(&philo->data->_died);
-        if (philo->data->philosopher_died == false)
+        if (cheaak_died(philo) == true)
         {
-            pthread_mutex_unlock(&philo->data->_died);
             if (flag == 0 )
                 printf("%lld\t%ld has taken a fork\n", time, philo->id + 1);
             else if (flag == 1 )
@@ -42,9 +42,8 @@ void print_msg(int flag, t_philo *philo, bool flage)
         }
 
     }
-    pthread_mutex_unlock(&philo->data->_hbsso_l9lawi);
     pthread_mutex_unlock(&philo->data->print_mutex);
-
+    
 
 }
 

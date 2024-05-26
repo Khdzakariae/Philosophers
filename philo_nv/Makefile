@@ -1,12 +1,12 @@
 NAME = philo
 
-FLAGS = -Wall -Wextra -Werror
+# FLAGS = -Wall -Wextra -Werror
 
 INCLUDES = -I "includes/"
 
 
 SRC_PHILO = sources/philosophers.c   sources/parse_argument.c sources/utils.c sources/routine_philosofers.c\
-			sources/philosofeers_utils.c \
+			sources/philosofeers_utils.c sources/set_mutex.c\
 
 
 all: $(NAME)
@@ -14,7 +14,7 @@ all: $(NAME)
 
 
 $(NAME): $(SRC_PHILO)
-	@cc  $^  $(FLAGS) $(INCLUDES) -o philo
+	@cc   $^  $(FLAGS) $(INCLUDES) -o philo
 
 clean:
 	@echo "clean [ ✅ ]"
