@@ -47,7 +47,7 @@ long	ft_atoi(char *str)
 bool	cheack(t_data *data, char **av)
 {
 	data->number_of_philosophers = ft_atoi(av[1]);
-	if (data->number_of_philosophers > INT_MAX)
+	if (data->number_of_philosophers <= 0)
 		return (false);
 	data->time_to_die = ft_atoi(av[2]);
 	if (data->time_to_die > INT_MAX || data->time_to_die < 60)
