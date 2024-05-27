@@ -33,7 +33,10 @@ bool	cheack_time_died(t_philo *philos, int i)
 	pthread_mutex_lock(&philos->data->_hbsso_l9lawi);
 	long current_time = the_time();
 	long dure = current_time - philos->time_to_last_eat;
-	if (dure > philos->data->time_to_die)
+
+
+	// sleep(10);
+	if (dure >= philos->data->time_to_die)
 	{
 		pthread_mutex_unlock(&philos->data->_hbsso_l9lawi);
 		return (false);
