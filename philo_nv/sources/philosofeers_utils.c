@@ -74,6 +74,7 @@ t_philo	*initialize_philosophers(t_data *data, t_forks *forks)
 	while (i < data->number_of_philosophers)
 	{
 		philos[i].id = i;
+
 		philos[i].data = data;
 		philos[i].time_to_last_eat = 0;
 
