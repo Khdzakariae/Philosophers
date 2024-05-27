@@ -1,7 +1,11 @@
 #include <philo_bonus.h>
 
 
-int main()
+int main(int argc, char **argv)
 {
-    printf("hey");
+    t_data data;
+
+	if (check_arguments(argc, argv, &data) != 0)
+		return (1);
+    return(0);
 }
