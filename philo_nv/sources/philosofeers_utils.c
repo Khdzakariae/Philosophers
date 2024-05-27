@@ -81,18 +81,18 @@ t_philo	*initialize_philosophers(t_data *data, t_forks *forks)
 		pthread_mutex_init(&philos[i].time_mutex, NULL);
 		if (i == 0)
 		{
-			philos[i].first_fork = &forks[0];
-			philos[i].second_fork = &forks[data->number_of_philosophers - 1];
+			philos[i].first_fork = &forks[data->number_of_philosophers - 1];
+			philos[i].second_fork = &forks[0];
 		}
 		else if (i % 2)
 		{
-			philos[i].first_fork = &forks[i - 1];
-			philos[i].second_fork = &forks[i];
+			philos[i].first_fork = &forks[i];
+			philos[i].second_fork = &forks[i - 1];
 		}
 		else
 		{
-			philos[i].first_fork = &forks[i];
-			philos[i].second_fork = &forks[i - 1];
+			philos[i].first_fork = &forks[i - 1];
+			philos[i].second_fork = &forks[i];
 		}
 		i++;
 	}
