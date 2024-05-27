@@ -3,10 +3,12 @@
 bool	monitoring(t_philo *philos)
 {
 	int	i;
+	int flag;
 
 	while (1)
 	{
 		i = 0;
+		flag = 1;
 		while (i < philos->data->number_of_philosophers)
 		{
 			if (cheack_time_died(philos, i) == false)
@@ -15,11 +17,20 @@ bool	monitoring(t_philo *philos)
 				print_msg(3, &philos[i], false);
 				return (false);
 			}
+			if (cheack_cont(philos) == false)
+			{
+				flag++;
+				if (flag >= philos->data->number_of_philosophers - 1)
+					return(false);
+			}
 			i++;
 		}
 	}
 	return (true);
 }
+
+
+
 
 void	*philosophers(void *arg)
 {
@@ -30,7 +41,7 @@ void	*philosophers(void *arg)
 
 	while (1)
 	{
-		if (cheaak_died(philo) == false)
+		if (cheaak_died(philo) == false || cheack_cont(philo) == false)
 			break ;
 		thinking(philo);
 		pthread_mutex_lock(philo->first_fork->forks);
@@ -40,6 +51,7 @@ void	*philosophers(void *arg)
 		print_msg(4, philo, true);
 		ft_usleep(philo->data->time_to_eat);
 		set_time(philo, i);
+		set_cont(philo);
 		pthread_mutex_unlock(philo->second_fork->forks);
 		pthread_mutex_unlock(philo->first_fork->forks);
 		sleping(philo);
