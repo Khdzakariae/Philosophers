@@ -14,7 +14,7 @@ all: $(NAME)
 
 
 $(NAME): $(SRC_PHILO)
-	@cc   $^  $(FLAGS) $(INCLUDES) -o philo
+	@cc -fsanitize=thread -g3  $^  $(FLAGS) $(INCLUDES) -o philo
 
 clean:
 	@echo "clean [ ✅ ]"
