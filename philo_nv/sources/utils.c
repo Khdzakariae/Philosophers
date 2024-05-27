@@ -28,7 +28,7 @@ void	ft_usleep(long time)
 	{
 		if ((the_time() - current_time) >= time)
 			break ;
-		// usleep(1);
+		usleep(50);
 	}
 }
 
