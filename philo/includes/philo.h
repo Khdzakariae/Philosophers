@@ -13,12 +13,14 @@
 typedef struct s_data
 {
 	long			number_of_philosophers;
+	long			must_eat;
 	long			time_to_died;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			start_time;
 	bool			philosopher_died;
+	pthread_mutex_t	cont_mutix;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	_died;
 	pthread_mutex_t	_hbsso_l9lawi;
@@ -34,6 +36,7 @@ typedef struct s_philo
 {
 	long			id;
 	long			time_to_last_eat;
+	long			cont;
 	t_data			*data;
 	t_forks			*first_fork;
 	t_forks			*second_fork;
@@ -42,6 +45,9 @@ typedef struct s_philo
 
 }					t_philo;
 
+
+void set_cont(t_philo *philo);
+bool 				cheack_cont(t_philo *philo);
 bool				cheack_time_died(t_philo *philos, int i);
 void				set_time(t_philo *philo, int i);
 void				set_philo_died(t_philo *philo);
