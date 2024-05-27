@@ -38,6 +38,7 @@ void	*philosophers(void *arg)
 		pthread_mutex_lock(philo->second_fork->forks);
 		print_msg(0, philo, true);
 		print_msg(4, philo, true);
+		ft_usleep(philo->data->time_to_eat);
 		set_time(philo, i);
 		pthread_mutex_unlock(philo->second_fork->forks);
 		pthread_mutex_unlock(philo->first_fork->forks);
