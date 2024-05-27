@@ -67,6 +67,7 @@ t_philo	*initialize_philosophers(t_data *data, t_forks *forks)
 	int i = 0;
 	t_philo *philos = malloc((data->number_of_philosophers) * sizeof(t_philo));
 	data->print_mutex = *(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(&data->cont_mutix, NULL);
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->_died, NULL);
 	pthread_mutex_init(&data->_hbsso_l9lawi, NULL);
@@ -74,10 +75,9 @@ t_philo	*initialize_philosophers(t_data *data, t_forks *forks)
 	while (i < data->number_of_philosophers)
 	{
 		philos[i].id = i;
-
+		philos[i].cont = 0;
 		philos[i].data = data;
 		philos[i].time_to_last_eat = 0;
-
 		pthread_mutex_init(&philos[i].time_mutex, NULL);
 		if (i == 0)
 		{
