@@ -23,7 +23,8 @@ int	main(int argc, char **argv)
 	philo = initialize_philosophers(&data, forks);
 	start_simulation(&data, philo);
 	if (monitoring(philo) == false)
-	{
+	{	
+		puts("ra maat");
 		if (data.number_of_philosophers != 1)
 			join_threads(&data, philo);
 		cleanup(philo, forks, data.number_of_philosophers);
