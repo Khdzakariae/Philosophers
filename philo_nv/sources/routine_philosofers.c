@@ -27,6 +27,7 @@ void	*philosophers(void *arg)
 	int		i;
 
 	philo = (t_philo *)arg;
+
 	while (1)
 	{
 		if (cheaak_died(philo) == false)
@@ -43,6 +44,7 @@ void	*philosophers(void *arg)
 		sleping(philo);
 		i++;
 	}
+	
 	return (NULL);
 }
 
