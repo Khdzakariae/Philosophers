@@ -1,11 +1,21 @@
 #include <philo_bonus.h>
 
 
-int main(int argc, char **argv)
+int main()
 {
-    t_data data;
+    // t_data data;
 
-	if (check_arguments(argc, argv, &data) != 0)
-		return (1);
+	// if (check_arguments(argc, argv, &data) != 0)
+	// 	return (1);
+    fork();
+    fork();
+    fork();
+    fork();
+
+
+        printf("hey \n");
+
+
+        
     return(0);
 }
