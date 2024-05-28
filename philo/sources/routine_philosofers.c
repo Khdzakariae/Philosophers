@@ -29,10 +29,6 @@ bool	monitoring(t_philo *philos , int ac)
 	return (true);
 }
 
-
-
-
-
 void	*philosophers(void *arg)
 {
 	t_philo	*philo;
