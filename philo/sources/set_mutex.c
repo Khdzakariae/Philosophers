@@ -1,5 +1,3 @@
-
-
 #include "philo.h"
 
 void	set_philo_died(t_philo *philo)
