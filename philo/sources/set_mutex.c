@@ -31,7 +31,7 @@ void set_cont(t_philo *philo)
 bool cheack_cont(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->cont_mutix);
-	if (philo->cont >= philo->data->must_eat + 1)
+	if (philo->cont > philo->data->must_eat + 1)
 	{
 		pthread_mutex_unlock(&philo->data->cont_mutix);
 		return(false);
