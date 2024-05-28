@@ -1,33 +1,34 @@
 #include "philo.h"
 
-bool	monitoring(t_philo *philos)
+bool	monitoring(t_philo *philos , int ac)
 {
 	int	i;
-	int flag;
 
 	while (1)
 	{
 		i = 0;
-		flag = 1;
 		while (i < philos->data->number_of_philosophers)
 		{
+			if (ac == 6)
+			{
+				if (cheack_cont(philos) == false)
+				{
+					set_philo_died(philos);
+					return(false);
+				}
+			}
 			if (cheack_time_died(philos, i) == false)
 			{
 				set_philo_died(philos);
 				print_msg(3, &philos[i], false);
 				return (false);
 			}
-			if (cheack_cont(philos) == false)
-			{
-				flag++;
-				if (flag >= philos->data->number_of_philosophers - 1)
-					return(false);
-			}
 			i++;
 		}
 	}
 	return (true);
 }
+
 
 
 
@@ -41,7 +42,7 @@ void	*philosophers(void *arg)
 
 	while (1)
 	{
-		if (cheaak_died(philo) == false || cheack_cont(philo) == false)
+		if (cheaak_died(philo) == false)
 			break ;
 		thinking(philo);
 		pthread_mutex_lock(philo->first_fork->forks);
@@ -57,7 +58,6 @@ void	*philosophers(void *arg)
 		sleping(philo);
 		i++;
 	}
-	
 	return (NULL);
 }
 
