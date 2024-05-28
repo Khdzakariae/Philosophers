@@ -44,7 +44,7 @@ long	ft_atoi(char *str)
 	return (result * sign);
 }
 
-bool	cheack(t_data *data, char **av)
+bool	cheack(t_data *data, char **av , int argc)
 {
 	data->number_of_philosophers = ft_atoi(av[1]);
 	if (data->number_of_philosophers <= 0)
@@ -58,21 +58,29 @@ bool	cheack(t_data *data, char **av)
 	data->time_to_sleep = ft_atoi(av[4]);
 	if (data->time_to_sleep > INT_MAX || data->time_to_sleep < 60)
 		return (false);
+	if (argc == 6)
+	{
+		data->must_eat = ft_atoi(av[5]);
+		if (data->must_eat > INT_MAX)
+			return(false);
+	}
 	data->time_to_died = 0;
 	return (true);
 }
 
 int	check_arguments(int argc, char **argv, t_data *data)
 {
-	if (argc != 5)
+	if (argc == 5 || argc == 6)
 	{
-		printf("Usage:%s \n",
-			argv[0]);
-		return (1);
+		if (!cheack(data, argv , argc))
+		{
+			printf("ERROR\n");
+			return (1);
+		}
 	}
-	if (!cheack(data, argv))
+	else
 	{
-		printf("ERROR\n");
+		printf("Usage:%s \n",argv[0]);
 		return (1);
 	}
 	return (0);
