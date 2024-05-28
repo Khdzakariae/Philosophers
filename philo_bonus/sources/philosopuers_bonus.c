@@ -1,21 +1,59 @@
 #include <philo_bonus.h>
+#include <semaphore.h>
+#include <string.h>
 
 
-int main()
+// int main (int argc , char **argv)
+// {
+//     t_data data;
+//     t_philo *philo;
+
+
+// 	if (check_arguments(argc, argv, &data) != 0)
+// 		return (1);
+//     philo = initialize_philosophers(&data);
+//     if (philo == NULL)
+//         return(1);
+// }
+
+
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <semaphore.h>
+
+#define THREAD_NUM 4
+
+sem_t semaphore;
+
+void* routine(void* args) 
 {
-    // t_data data;
+    sem_wait(&semaphore);
+    sleep(1);
+    printf("Hello from thread %d\n", *(int*)args);
+    sem_post(&semaphore);
+    free(args);
+}
 
-	// if (check_arguments(argc, argv, &data) != 0)
-	// 	return (1);
-    fork();
-    fork();
-    fork();
-    fork();
+int main(int argc, char *argv[]) {
+    pthread_t th[THREAD_NUM];
+    sem_init(&semaphore, 0, 1);
+    int i;
+    for (i = 0; i < THREAD_NUM; i++) {
+        int* a = malloc(sizeof(int));
+        *a = i;
+        if (pthread_create(&th[i], NULL, &routine, a) != 0) {
+            perror("Failed to create thread");
+        }
+    }
 
-
-        printf("hey \n");
-
-
-        
-    return(0);
+    for (i = 0; i < THREAD_NUM; i++) {
+        if (pthread_join(th[i], NULL) != 0) {
+            perror("Failed to join thread");
+        }
+    }
+    sem_destroy(&semaphore);
+    return 0;
 }
