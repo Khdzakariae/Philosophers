@@ -2,10 +2,10 @@ NAME_BONUS = philo_bonus
 
 INCLUDES = -I "includes/"
 
-FLAGS = -Wall -Wextra -Werror
+# FLAGS = -Wall -Wextra -Werror
 
 
-SRC_PHILO__BONUS = sources/philosopuers_bonus.c sources/parse_argumants.c \
+SRC_PHILO__BONUS = sources/philosopuers_bonus.c sources/parse_argumants.c sources/philosofeers_bonus_utils.c\
 
 
 all : $(NAME_BONUS)
