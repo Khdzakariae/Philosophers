@@ -24,16 +24,15 @@ bool	cheaak_died(t_philo *philo)
 void set_cont(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->cont_mutix);
-	(philo)->cont++;
+	philo->cont++;
 	pthread_mutex_unlock(&philo->data->cont_mutix);
 }
 
 bool cheack_cont(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->cont_mutix);
-	if (philo->cont >= philo->data->must_eat)
+	if (philo->cont >= philo->data->must_eat + 1)
 	{
-		puts("hey im here ");
 		pthread_mutex_unlock(&philo->data->cont_mutix);
 		return(false);
 	}
@@ -44,7 +43,7 @@ bool cheack_cont(t_philo *philo)
 void	set_time(t_philo *philo, int i)
 {
 	pthread_mutex_lock(&philo->data->_hbsso_l9lawi);
-	(philo)->time_to_last_eat = the_time();
+	philo->time_to_last_eat = the_time();
 	pthread_mutex_unlock(&philo->data->_hbsso_l9lawi);
 }
 
