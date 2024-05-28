@@ -1,6 +1,4 @@
-#include <philo_bonus.h>
-#include <semaphore.h>
-#include <string.h>
+
 
 
 // int main (int argc , char **argv)
@@ -16,7 +14,6 @@
 //         return(1);
 // }
 
-
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,36 +21,45 @@
 #include <string.h>
 #include <semaphore.h>
 
-#define THREAD_NUM 4
+#define NBR 4
 
-sem_t semaphore;
+sem_t *semaphore;
 
-void* routine(void* args) 
-{
-    sem_wait(&semaphore);
-    sleep(1);
-    printf("Hello from thread %d\n", *(int*)args);
-    sem_post(&semaphore);
-    free(args);
+void* routine(void* arg) {
+    int index = *(int*)arg;// Free the allocated memory
+    puts("==========");
+    // Use the semaphore
+    sem_wait(semaphore);
+    printf("Thread %d in critical section\n", index);
+    sem_post(semaphore);
+
+    return NULL;
 }
 
-int main(int argc, char *argv[]) {
-    pthread_t th[THREAD_NUM];
-    sem_init(&semaphore, 0, 1);
-    int i;
-    for (i = 0; i < THREAD_NUM; i++) {
-        int* a = malloc(sizeof(int));
+int main() {
+    pthread_t th[NBR];
+    semaphore = (sem_open("/mysemaphore", O_CREAT, 2, 1));
+    if (semaphore == SEM_FAILED) {
+        perror("sem_open");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < NBR; i++) {
+        int *a = malloc(sizeof(int));
+        if (a == NULL) {
+            perror("malloc");
+            exit(EXIT_FAILURE);
+        }
         *a = i;
         if (pthread_create(&th[i], NULL, &routine, a) != 0) {
-            perror("Failed to create thread");
+            perror("pthread_create");
+            free(a);
+            exit(EXIT_FAILURE);
+        }
+            for (int i = 0; i < NBR; i++) {
+                pthread_join(th[i], NULL);
         }
     }
 
-    for (i = 0; i < THREAD_NUM; i++) {
-        if (pthread_join(th[i], NULL) != 0) {
-            perror("Failed to join thread");
-        }
-    }
-    sem_destroy(&semaphore);
     return 0;
 }
