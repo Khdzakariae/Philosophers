@@ -20,16 +20,17 @@
 #include <unistd.h>
 #include <string.h>
 #include <semaphore.h>
-
+       #include <fcntl.h>          
+       #include <sys/stat.h>        
 #define NBR 4
 
 sem_t *semaphore;
 
 void* routine(void* arg) {
-    int index = *(int*)arg;// Free the allocated memory
+    int index = *(int*)arg;
     puts("==========");
-    // Use the semaphore
     sem_wait(semaphore);
+    sleep(1);
     printf("Thread %d in critical section\n", index);
     sem_post(semaphore);
 
@@ -38,28 +39,16 @@ void* routine(void* arg) {
 
 int main() {
     pthread_t th[NBR];
-    semaphore = (sem_open("/mysemaphore", O_CREAT, 2, 1));
-    if (semaphore == SEM_FAILED) {
-        perror("sem_open");
-        exit(EXIT_FAILURE);
-    }
+    sem_unlink("/mysemaphore");
 
+    semaphore = (sem_open("/mysemaphore", O_CREAT, 0644, 1));
     for (int i = 0; i < NBR; i++) {
         int *a = malloc(sizeof(int));
-        if (a == NULL) {
-            perror("malloc");
-            exit(EXIT_FAILURE);
-        }
         *a = i;
-        if (pthread_create(&th[i], NULL, &routine, a) != 0) {
-            perror("pthread_create");
-            free(a);
-            exit(EXIT_FAILURE);
-        }
-            for (int i = 0; i < NBR; i++) {
-                pthread_join(th[i], NULL);
-        }
+        pthread_create(&th[i], NULL, &routine, a);
     }
-
+        for (int i = 0; i < NBR; i++) {
+            pthread_join(th[i], NULL);
+        }
     return 0;
 }
