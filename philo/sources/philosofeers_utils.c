@@ -32,7 +32,7 @@ void	print_msg(int flag, t_philo *philo, bool flage)
 		if (cheaak_died(philo) == true)
 		{
 			if (flag == 0)
-				printf("%lld\t%ld has taken a fork\n", time, philo->id + 1);
+				printf("%lld\t%ld has taken a fork\n", time, philo->id +1);
 			else if (flag == 1)
 				printf("%lld\t%ld is sleeping\n", time, philo->id + 1);
 			else if (flag == 2)
@@ -66,11 +66,12 @@ t_philo	*initialize_philosophers(t_data *data, t_forks *forks)
 {
 	int i = 0;
 	t_philo *philos = malloc((data->number_of_philosophers) * sizeof(t_philo));
-	data->print_mutex = *(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+
 	pthread_mutex_init(&data->cont_mutix, NULL);
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->_died, NULL);
 	pthread_mutex_init(&data->_hbsso_l9lawi, NULL);
+	int nmbr = data->number_of_philosophers;
 
 	while (i < data->number_of_philosophers)
 	{
@@ -79,21 +80,21 @@ t_philo	*initialize_philosophers(t_data *data, t_forks *forks)
 		philos[i].data = data;
 		philos[i].time_to_last_eat = 0;
 		pthread_mutex_init(&philos[i].time_mutex, NULL);
-		if (i == 0)
-		{
-			philos[i].first_fork = &forks[data->number_of_philosophers - 1];
-			philos[i].second_fork = &forks[0];
-		}
-		else if (i % 2)
-		{
-			philos[i].first_fork = &forks[i];
-			philos[i].second_fork = &forks[i - 1];
-		}
-		else
-		{
-			philos[i].first_fork = &forks[i - 1];
-			philos[i].second_fork = &forks[i];
-		}
+		philos[i].first_fork = &forks[(i + 1) % nmbr];
+		philos[i].second_fork = &forks[i];
+		// if (i == 0)
+		// {
+		// 	philos[i].first_fork = &forks[data->number_of_philosophers - 1];
+		// 	philos[i].second_fork = &forks[0];
+		// }
+		// else if (i % 2)
+		// {
+		// 	philos[i].first_fork = &forks[i];
+		// 	philos[i].second_fork = &forks[(i - 1) % nmbr];
+		// }
+		// else
+		// {
+		// }
 		i++;
 	}
 	return (philos);
