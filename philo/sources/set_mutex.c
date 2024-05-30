@@ -38,7 +38,7 @@ bool cheack_cont(t_philo *philo)
 	return(true);
 }
 
-void	set_time(t_philo *philo, int i)
+void	set_time(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->_hbsso_l9lawi);
 	philo->time_to_last_eat = the_time();
