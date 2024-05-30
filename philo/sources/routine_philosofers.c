@@ -32,12 +32,13 @@ bool	monitoring(t_philo *philos , int ac)
 void	*philosophers(void *arg)
 {
 	t_philo	*philo;
-	int		i;
 
 	philo = (t_philo *)arg;
 
 	while (1)
 	{
+		if (philo->id % 2 != 0)
+			usleep(300);
 		if (cheaak_died(philo) == false)
 			break ;
 		thinking(philo);
@@ -47,12 +48,12 @@ void	*philosophers(void *arg)
 		print_msg(0, philo, true);
 		print_msg(4, philo, true);
 		ft_usleep(philo->data->time_to_eat);
-		set_time(philo, i);
+		set_time(philo);
 		set_cont(philo);
 		pthread_mutex_unlock(philo->second_fork->forks);
 		pthread_mutex_unlock(philo->first_fork->forks);
 		sleping(philo);
-		i++;
+		usleep(50);
 	}
 	return (NULL);
 }
