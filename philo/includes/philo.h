@@ -49,7 +49,7 @@ bool				monitoring_cont(t_philo *philos);
 void 				set_cont(t_philo *philo);
 bool 				cheack_cont(t_philo *philo);
 bool				cheack_time_died(t_philo *philos, int i);
-void				set_time(t_philo *philo, int i);
+void				set_time(t_philo *philo);
 void				set_philo_died(t_philo *philo);
 bool				cheaak_died(t_philo *philo);
 bool	monitoring(t_philo *philos , int ac);
