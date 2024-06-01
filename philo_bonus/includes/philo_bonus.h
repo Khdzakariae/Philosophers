@@ -1,6 +1,7 @@
 #ifndef PHILO_BONNUS_H
 # define PHILO_BONNUS_H
 
+#include <signal.h>
 #include <semaphore.h>
 #include <sys/stat.h> 
 # include <limits.h>
@@ -21,6 +22,8 @@ typedef struct s_data
 	long			time_to_sleep;
 	long			must_eat;
 	long			start_time;
+	bool			philosopher_died;
+	sem_t			*semaphore1;
 	sem_t 			*semaphore;
 
 }					t_data;
@@ -35,6 +38,8 @@ typedef struct s_philo
 }					t_philo;
 
 
+bool	monitoring(t_philo *philos , int ac);
+void	set_time(t_philo *philo);
 long	start_time(bool init);
 long	the_time(void);
 void	ft_usleep(long time);
