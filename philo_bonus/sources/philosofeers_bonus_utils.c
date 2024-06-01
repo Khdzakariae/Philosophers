@@ -1,12 +1,25 @@
 #include <philo_bonus.h>
 
-void retine(t_philo *philo)
-{
-    sem_wait(philo->data->semaphore);
-    thinking(philo);
-    sleep(1);
-    sem_post(philo->data->semaphore);
-    exit(0);
+
+void retine(t_philo *philo) {
+    while (1) {
+        thinking(philo);
+        sem_wait(philo->data->semaphore);
+        print_msg(0,philo, true);
+        sem_wait(philo->data->semaphore);
+        print_msg(0, philo, true);
+        print_msg(4, philo, true);
+
+        sem_wait(philo->data->semaphore1);
+        philo->time_to_last_eat = the_time();
+        sem_post(philo->data->semaphore1);
+
+        usleep(philo->data->time_to_eat);
+
+        sem_post(philo->data->semaphore);
+        sem_post(philo->data->semaphore);
+        sleping(philo);
+    }
 }
 
 t_philo  *initialize_philosophers(t_data *data)
@@ -18,7 +31,11 @@ t_philo  *initialize_philosophers(t_data *data)
     if (philo == NULL)
         return NULL;
     sem_unlink("/mysemaphore");
-    data->semaphore = (sem_open("/mysemaphore", O_CREAT, 0644, 1));
+    sem_unlink("/mysemaphore1");
+    data->semaphore = (sem_open("/mysemaphore", O_CREAT, 0644, data->number_of_philosophers));
+    data->semaphore1 = (sem_open("/mysemaphore1", O_CREAT, 0644, 1));
+
+
     while (i < data->number_of_philosophers)
     {
         philo[i].id = i;
@@ -45,6 +62,4 @@ void  start_simulation(t_data *data, t_philo *philo)
         else
             i++;
     }
-    for (int j = 0; j <  data->number_of_philosophers; j++)
-        wait(NULL);
 }
