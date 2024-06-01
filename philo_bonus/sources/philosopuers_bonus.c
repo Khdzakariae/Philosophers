@@ -10,9 +10,13 @@ int main (int argc , char **argv)
 	if (check_arguments(argc, argv, &data) != 0)
 		return (1);
     philo = initialize_philosophers(&data);
-    start_simulation(&data, philo);
     if (philo == NULL)
         return(1);
+    start_simulation(&data, philo);
+    monitoring(philo, argc);
+    for (int i = 0; i < data.number_of_philosophers; i++) {
+        waitpid(philo[i].pid, NULL, 0);
+    }
 }
 
 
