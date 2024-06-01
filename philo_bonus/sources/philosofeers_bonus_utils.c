@@ -1,21 +1,21 @@
 #include <philo_bonus.h>
 
 
-void retine(t_philo *philo) {
-    while (1) {
+void retine(t_philo *philo)
+{
+    while (1)
+    {
         thinking(philo);
         sem_wait(philo->data->semaphore);
-        print_msg(0,philo, true);
+        print_msg(0, philo, true);
         sem_wait(philo->data->semaphore);
         print_msg(0, philo, true);
         print_msg(4, philo, true);
 
-        sem_wait(philo->data->semaphore1);
-        philo->time_to_last_eat = the_time();
-        sem_post(philo->data->semaphore1);
+        set_time(philo);
 
-        usleep(philo->data->time_to_eat);
 
+        ft_usleep(philo->data->time_to_eat);
         sem_post(philo->data->semaphore);
         sem_post(philo->data->semaphore);
         sleping(philo);
@@ -48,17 +48,20 @@ t_philo  *initialize_philosophers(t_data *data)
 }
 
 
-void  start_simulation(t_data *data, t_philo *philo)
+void start_simulation(t_data *data, t_philo *philo)
 {
     int i = 0;
-    int pid = 0;
-	start_time(true);
-	data->start_time = the_time();
+
+    start_time(true);
+    data->start_time = the_time();
     while (i < data->number_of_philosophers)
     {
         philo[i].pid = fork();
         if (philo[i].pid == 0)
+        {
             retine(&philo[i]);
+            exit(0);
+        }
         else
             i++;
     }
