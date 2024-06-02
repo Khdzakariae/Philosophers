@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine_philosofers.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/02 18:09:04 by zel-khad          #+#    #+#             */
+/*   Updated: 2024/06/02 18:55:04 by zel-khad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 bool	monitoring(t_philo *philos , int ac)
@@ -25,6 +37,7 @@ bool	monitoring(t_philo *philos , int ac)
 			}
 			i++;
 		}
+		usleep(100);
 	}
 	return (true);
 }
@@ -36,7 +49,6 @@ void	*philosophers(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 != 0)
 		usleep(200);
-
 	while (1)
 	{
 		if (cheaak_died(philo) == false)
@@ -53,7 +65,7 @@ void	*philosophers(void *arg)
 		pthread_mutex_unlock(philo->second_fork->forks);
 		pthread_mutex_unlock(philo->first_fork->forks);
 		sleping(philo);
-		usleep(50);
+		usleep(100);
 	}
 	return (NULL);
 }
