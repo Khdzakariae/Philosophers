@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/02 18:09:00 by zel-khad          #+#    #+#             */
+/*   Updated: 2024/06/02 18:33:36 by zel-khad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	join_threads(t_data *data, t_philo *philos)
 {
-	(void)*data;
 	for (int i = 0; i < philos->data->number_of_philosophers; i++)
 	{
 		pthread_join(philos[i].thread_philo, NULL);
