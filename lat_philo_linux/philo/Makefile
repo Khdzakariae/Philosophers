@@ -6,7 +6,7 @@ INCLUDES = -I "includes/"
 
 
 SRC_PHILO = sources/philosophers.c   sources/parse_argument.c sources/utils.c sources/routine_philosofers.c\
-			sources/philosofeers_utils.c sources/set_mutex.c\
+			sources/philosofeers_utils.c sources/set_mutex.c sources/chech_mutix.c\
 
 
 all: $(NAME)
@@ -14,7 +14,7 @@ all: $(NAME)
 
 
 $(NAME): $(SRC_PHILO)
-	@cc -fsanitize=thread   $^  $(FLAGS) $(INCLUDES) -o philo
+	@cc   $^  $(FLAGS) $(INCLUDES) -o philo
 
 clean:
 	@echo "clean [ ✅ ]"
