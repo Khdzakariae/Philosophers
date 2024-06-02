@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/02 18:09:12 by zel-khad          #+#    #+#             */
+/*   Updated: 2024/06/02 18:55:09 by zel-khad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 long	start_time(bool init)
@@ -24,11 +36,12 @@ void	ft_usleep(long time)
 	long	current_time;
 
 	current_time = the_time();
+	
 	while (1)
 	{
 		if ((the_time() - current_time) >= time)
 			break ;
-		usleep(50);
+		usleep(100);
 	}
 }
 
