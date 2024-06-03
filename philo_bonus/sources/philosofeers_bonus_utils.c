@@ -1,21 +1,44 @@
 #include <philo_bonus.h>
 
+        // printf("last eat de philo %ld is : %ld \n", philo->id + 1, philo->time_to_last_eat);
+        // printf("dure is : %d \n", dure);
 
 void retine(t_philo *philo)
 {
+    int dure;
+
+    if (philo->id % 2 != 0)
+        usleep(300);
+
     while (1)
     {
+        dure = the_time() - philo->time_to_last_eat;
+        if (dure > philo->data->time_to_die)
+        {
+            set_philo_died(philo);
+            print_msg(3, philo, false);
+
+            sem_post(philo->data->semaphore);
+            sem_post(philo->data->semaphore);
+            exit(1);
+        }
+
         thinking(philo);
+
         sem_wait(philo->data->semaphore);
         print_msg(0, philo, true);
         sem_wait(philo->data->semaphore);
         print_msg(0, philo, true);
         print_msg(4, philo, true);
 
-        set_time(philo);
 
-
+        philo->time_to_last_eat = the_time();
         ft_usleep(philo->data->time_to_eat);
+        printf("last eat de philo %ld is : %ld \n", philo->id + 1, philo->data->time_to_eat);
+        
+
+
+
         sem_post(philo->data->semaphore);
         sem_post(philo->data->semaphore);
         sleping(philo);
@@ -34,7 +57,6 @@ t_philo  *initialize_philosophers(t_data *data)
     sem_unlink("/mysemaphore1");
     data->semaphore = (sem_open("/mysemaphore", O_CREAT, 0644, data->number_of_philosophers));
     data->semaphore1 = (sem_open("/mysemaphore1", O_CREAT, 0644, 1));
-
 
     while (i < data->number_of_philosophers)
     {
