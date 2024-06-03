@@ -1,6 +1,16 @@
 
 #include <philo_bonus.h>
 
+void arrete(t_philo *philo)
+{
+	int i = 0;
+	while (i < philo->data->number_of_philosophers)
+	{
+		kill(philo[i].pid, SIGKILL);
+		i++;
+	}
+}
+
 int main (int argc , char **argv)
 {
     t_data data;
@@ -13,9 +23,18 @@ int main (int argc , char **argv)
     if (philo == NULL)
         return(1);
     start_simulation(&data, philo);
-    monitoring(philo, argc);
-    for (int i = 0; i < data.number_of_philosophers; i++) {
-        waitpid(philo[i].pid, NULL, 0);
+    // monitoring(philo, argc);
+    while (1)
+    {
+        int status = waitpid(-1, &status ,0);
+        if (status == -1)
+            {
+                exit(22);
+            }
+            else {
+                arrete(philo);
+                exit(1);
+            }
     }
 }
 
