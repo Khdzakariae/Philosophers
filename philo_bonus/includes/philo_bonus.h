@@ -37,10 +37,9 @@ typedef struct s_philo
 	t_data			*data;
 }					t_philo;
 
-
+bool	cheaak_died(t_philo *philo);
 void	set_philo_died(t_philo *philo);
 void arrete(t_philo *philo);
-bool	monitoring(t_philo *philos , int ac);
 void	set_time(t_philo *philo);
 long	start_time(bool init);
 long	the_time(void);
