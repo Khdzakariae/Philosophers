@@ -1,0 +1,11 @@
+*.o
+
+
+*.DS_Store
+
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
