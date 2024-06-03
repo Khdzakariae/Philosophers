@@ -38,6 +38,8 @@ typedef struct s_philo
 }					t_philo;
 
 
+void	set_philo_died(t_philo *philo);
+void arrete(t_philo *philo);
 bool	monitoring(t_philo *philos , int ac);
 void	set_time(t_philo *philo);
 long	start_time(bool init);
