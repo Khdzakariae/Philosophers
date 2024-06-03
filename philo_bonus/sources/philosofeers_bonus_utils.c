@@ -3,45 +3,49 @@
         // printf("last eat de philo %ld is : %ld \n", philo->id + 1, philo->time_to_last_eat);
         // printf("dure is : %d \n", dure);
 
-void retine(t_philo *philo)
+void *monitoring(void *arg)
 {
-    int dure;
+    t_philo	*philo;
+    long dure;
+    long current_time;
 
-    if (philo->id % 2 != 0)
-        usleep(300);
+	philo = (t_philo *)arg;
 
     while (1)
     {
-        dure = the_time() - philo->time_to_last_eat;
+        current_time = the_time();
+	    dure = current_time - philo->time_to_last_eat;
+
         if (dure > philo->data->time_to_die)
         {
             set_philo_died(philo);
             print_msg(3, philo, false);
-
-            sem_post(philo->data->semaphore);
-            sem_post(philo->data->semaphore);
             exit(1);
         }
+    }
+}
 
-        thinking(philo);
+void retine(t_philo *philo)
+{
 
-        sem_wait(philo->data->semaphore);
-        print_msg(0, philo, true);
-        sem_wait(philo->data->semaphore);
-        print_msg(0, philo, true);
-        print_msg(4, philo, true);
+    if (philo->id % 2 != 0)
+        usleep(300);
+    while (1)
+    {
 
-
-        philo->time_to_last_eat = the_time();
-        ft_usleep(philo->data->time_to_eat);
-        printf("last eat de philo %ld is : %ld \n", philo->id + 1, philo->data->time_to_eat);
-        
-
-
-
-        sem_post(philo->data->semaphore);
-        sem_post(philo->data->semaphore);
-        sleping(philo);
+            thinking(philo);
+            sem_wait(philo->data->semaphore);
+            print_msg(0, philo, true);
+            sem_wait(philo->data->semaphore);
+            print_msg(0, philo, true);
+            print_msg(4, philo, true);
+            philo->time_to_last_eat = the_time();
+            ft_usleep(philo->data->time_to_eat);    
+            sem_post(philo->data->semaphore);
+            sem_post(philo->data->semaphore);
+            print_msg(1, philo, true);
+	        ft_usleep(philo->data->time_to_sleep);
+            usleep(300);
     }
 }
 
@@ -75,12 +79,14 @@ void start_simulation(t_data *data, t_philo *philo)
     int i = 0;
 
     start_time(true);
-    data->start_time = the_time();
     while (i < data->number_of_philosophers)
     {
+
         philo[i].pid = fork();
         if (philo[i].pid == 0)
         {
+            pthread_t th;
+            pthread_create(&th, NULL, monitoring, &philo[i]);
             retine(&philo[i]);
             exit(0);
         }
