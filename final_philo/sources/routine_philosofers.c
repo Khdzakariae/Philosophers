@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:09:04 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/06/03 14:01:48 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:52:45 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool	monitoring(t_philo *philos, int ac)
 				return (false);
 			}
 		}
-		usleep(100);
+		usleep(300);
 	}
 	return (true);
 }
@@ -59,24 +59,35 @@ void	*philosophers(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 != 0)
-		usleep(200);
+		usleep(20);
 	while (1)
 	{
 		if (cheaak_died(philo) == false)
 			break ;
 		thinking(philo);
-		pthread_mutex_lock(philo->first_fork->forks);
-		print_msg(0, philo, true);
-		pthread_mutex_lock(philo->second_fork->forks);
-		print_msg(0, philo, true);
+		if (philo->id % 2 != 0)
+		{
+			pthread_mutex_lock(philo->first_fork->forks);
+			print_msg(0, philo, true);
+			pthread_mutex_lock(philo->second_fork->forks);
+			print_msg(0, philo, true);
+		}
+		else
+		{
+			pthread_mutex_lock(philo->second_fork->forks);
+			print_msg(0, philo, true);
+			pthread_mutex_lock(philo->first_fork->forks);
+			print_msg(0, philo, true);
+			
+		}
 		print_msg(4, philo, true);
-		ft_usleep(philo->data->time_to_eat);
 		set_time(philo);
+		ft_usleep(philo->data->time_to_eat);
 		set_cont(philo);
 		pthread_mutex_unlock(philo->second_fork->forks);
 		pthread_mutex_unlock(philo->first_fork->forks);
 		sleping(philo);
-		usleep(100);
+		usleep(300);
 	}
 	return (NULL);
 }
@@ -90,9 +101,7 @@ void	start_simulation(t_data *data, t_philo *philos)
 	data->start_time = the_time();
 	while (i < data->number_of_philosophers)
 	{
-		
 		pthread_create(&philos[i].thread_philo, NULL, philosophers, &philos[i]);
-		usleep(200);
 		i++;
 	}
 }

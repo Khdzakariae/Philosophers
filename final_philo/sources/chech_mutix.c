@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:19:24 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/06/03 09:48:48 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:55:13 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	cheack_time_died(t_philo *philos)
 	pthread_mutex_lock(&philos->data->set_time_mutix);
 	current_time = the_time();
 	dure = current_time - philos->time_to_last_eat;
-	if (dure > philos->data->time_to_die)
+	if (dure >= philos->data->time_to_die)
 	{
 		pthread_mutex_unlock(&philos->data->set_time_mutix);
 		return (false);

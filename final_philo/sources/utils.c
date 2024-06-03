@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:09:12 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/06/03 09:55:19 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:50:56 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_usleep(long time)
 	{
 		if ((the_time() - current_time) >= time)
 			break ;
-		usleep(100);
+		usleep(50);
 	}
 }
 
