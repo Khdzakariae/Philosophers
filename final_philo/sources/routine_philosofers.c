@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:09:04 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/06/03 09:49:06 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:01:48 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ void	start_simulation(t_data *data, t_philo *philos)
 	data->start_time = the_time();
 	while (i < data->number_of_philosophers)
 	{
+		
 		pthread_create(&philos[i].thread_philo, NULL, philosophers, &philos[i]);
+		usleep(200);
 		i++;
 	}
 }
