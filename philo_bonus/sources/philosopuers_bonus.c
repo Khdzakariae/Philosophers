@@ -23,7 +23,7 @@ int main (int argc , char **argv)
     if (philo == NULL)
         return(1);
     start_simulation(&data, philo);
-    // monitoring(philo, argc);
+
     while (1)
     {
         int status = waitpid(-1, &status ,0);
