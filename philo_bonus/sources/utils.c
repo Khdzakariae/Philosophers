@@ -1,31 +1,5 @@
 #include <philo_bonus.h>
 
-void	print_msg(int flag, t_philo *philo, bool flage)
-{
-	long long	time;
-
-	sem_wait(philo->data->semaphore1);
-	time = the_time();
-	if (flage == false)
-	{
-		printf("%lld\t%ld died\n", time, philo->id + 1);
-		return;
-
-	}
-	if (cheaak_died(philo) == true)
-	{
-		if (flag == 0)
-			printf("%lld\t%ld has taken a fork\n", time, philo->id + 1);
-		else if (flag == 1)
-			printf("%lld\t%ld is sleeping\n", time, philo->id + 1);
-		else if (flag == 2)
-			printf("%lld\t%ld is thinking\n", time, philo->id + 1);
-		else if (flag == 4)
-			printf("%lld\t%ld is eating\n", time, philo->id + 1);
-	}
-	sem_post(philo->data->semaphore1);
-}
-
 long	start_time(bool init)
 {
 	static long	start = 0;

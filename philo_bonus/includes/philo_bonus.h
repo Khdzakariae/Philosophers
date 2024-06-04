@@ -1,55 +1,56 @@
 #ifndef PHILO_BONNUS_H
 # define PHILO_BONNUS_H
 
-#include <signal.h>
-#include <semaphore.h>
-#include <sys/stat.h> 
 # include <limits.h>
 # include <pthread.h>
+# include <semaphore.h>
+# include <signal.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include <sys/time.h>
 # include <time.h>
 # include <unistd.h>
 
 typedef struct s_data
 {
-	int				arg;
-	long			number_of_philosophers;
-	long			time_to_died;
-	long			time_to_die;
-	long			time_to_eat;
-	long			time_to_sleep;
-	long			must_eat;
-	long			start_time;
-	bool			philosopher_died;
-	sem_t			*semaphore1;
-	sem_t 			*semaphore;
+	int			arg;
+	long		number_of_philosophers;
+	long		time_to_died;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
+	long		must_eat;
+	long		start_time;
+	bool		philosopher_died;
+	sem_t		*semaphore1;
+	sem_t		*semaphore;
 
-}					t_data;
+}				t_data;
 
 typedef struct s_philo
 {
-	int				pid;
-	long			id;
-	long			time_to_last_eat;
-	long			cont;
-	t_data			*data;
-	pthread_t		thread_philo;
-}					t_philo;
+	int			pid;
+	long		id;
+	long		time_to_last_eat;
+	long		cont;
+	t_data		*data;
+	pthread_t	thread_philo;
+}				t_philo;
 
-bool	cheaak_died(t_philo *philo);
-void	set_philo_died(t_philo *philo);
-void arrete(t_philo *philo);
-void	set_time(t_philo *philo);
-long	start_time(bool init);
-long	the_time(void);
-void	ft_usleep(long time);
-void	sleping(t_philo *philo);
-void	thinking(t_philo *philo);
-void	print_msg(int flag, t_philo *philo, bool flage);
-void  start_simulation(t_data *data, t_philo *philo);
-t_philo  *initialize_philosophers(t_data *data);
-int	check_arguments(int argc, char **argv, t_data *data);
+bool			cheaak_died(t_philo *philo);
+void			set_philo_died(t_philo *philo);
+void			arrete(t_philo *philo);
+void			set_time(t_philo *philo);
+long			start_time(bool init);
+long			the_time(void);
+void			ft_usleep(long time);
+void			sleping(t_philo *philo);
+void			thinking(t_philo *philo);
+void			print_msg(int flag, t_philo *philo, bool flage);
+void			start_simulation(t_data *data, t_philo *philo);
+t_philo			*initialize_philosophers(t_data *data);
+int				check_arguments(int argc, char **argv, t_data *data);
+
 #endif
