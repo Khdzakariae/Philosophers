@@ -64,6 +64,7 @@ bool	cheack(t_data *data, char **av , int argc)
 		if (data->must_eat > INT_MAX)
 			return(false);
 	}
+	data->arg = argc;
 	data->time_to_died = 0;
 	return (true);
 }

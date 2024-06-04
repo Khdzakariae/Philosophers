@@ -6,9 +6,11 @@ void arrete(t_philo *philo)
 	int i = 0;
 	while (i < philo->data->number_of_philosophers)
 	{
+        pthread_join(philo[i].thread_philo, NULL);
 		kill(philo[i].pid, SIGKILL);
 		i++;
 	}
+	free(philo);
 }
 
 int main (int argc , char **argv)
@@ -29,6 +31,7 @@ int main (int argc , char **argv)
         int status = waitpid(-1, &status ,0);
         if (status == -1)
             {
+	            free(philo);
                 exit(22);
             }
             else {

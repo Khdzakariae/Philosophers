@@ -15,6 +15,7 @@
 
 typedef struct s_data
 {
+	int				arg;
 	long			number_of_philosophers;
 	long			time_to_died;
 	long			time_to_die;
@@ -35,6 +36,7 @@ typedef struct s_philo
 	long			time_to_last_eat;
 	long			cont;
 	t_data			*data;
+	pthread_t		thread_philo;
 }					t_philo;
 
 bool	cheaak_died(t_philo *philo);

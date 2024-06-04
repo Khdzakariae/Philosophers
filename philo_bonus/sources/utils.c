@@ -12,19 +12,16 @@ void	print_msg(int flag, t_philo *philo, bool flage)
 		return;
 
 	}
-	if (flage == true)
+	if (cheaak_died(philo) == true)
 	{
-		if (cheaak_died(philo) == true)
-		{
-			if (flag == 0)
-				printf("%lld\t%ld has taken a fork\n", time, philo->id + 1);
-			else if (flag == 1)
-				printf("%lld\t%ld is sleeping\n", time, philo->id + 1);
-			else if (flag == 2)
-				printf("%lld\t%ld is thinking\n", time, philo->id + 1);
-			else if (flag == 4)
-				printf("%lld\t%ld is eating\n", time, philo->id + 1);
-		}
+		if (flag == 0)
+			printf("%lld\t%ld has taken a fork\n", time, philo->id + 1);
+		else if (flag == 1)
+			printf("%lld\t%ld is sleeping\n", time, philo->id + 1);
+		else if (flag == 2)
+			printf("%lld\t%ld is thinking\n", time, philo->id + 1);
+		else if (flag == 4)
+			printf("%lld\t%ld is eating\n", time, philo->id + 1);
 	}
 	sem_post(philo->data->semaphore1);
 }
@@ -57,7 +54,7 @@ void	ft_usleep(long time)
 	{
 		if ((the_time() - current_time) >= time)
 			break ;
-		usleep(50);
+		usleep(70);
 	}
 }
 
