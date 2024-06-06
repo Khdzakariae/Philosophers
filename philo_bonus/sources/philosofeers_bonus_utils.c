@@ -1,5 +1,7 @@
 #include <philo_bonus.h>
 
+
+
 void	arrete(t_philo *philo)
 {
 	int	i;
@@ -7,11 +9,9 @@ void	arrete(t_philo *philo)
 	i = 0;
 	while (i < philo->data->number_of_philosophers)
 	{
-		pthread_join(philo[i].thread_philo, NULL);
 		kill(philo[i].pid, SIGKILL);
 		i++;
 	}
-	free(philo);
 }
 
 void	print_msg(int flag, t_philo *philo, bool flage)
@@ -25,7 +25,7 @@ void	print_msg(int flag, t_philo *philo, bool flage)
 		printf("%lld\t%ld died\n", time, philo->id + 1);
 		return ;
 	}
-	if (philo->data->philosopher_died == false)
+	else
 	{
 		if (flag == 0)
 			printf("%lld\t%ld has taken a fork\n", time, philo->id + 1);

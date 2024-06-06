@@ -1,5 +1,18 @@
 #include <philo_bonus.h>
 
+void	join_threads(t_philo *philos)
+{
+	int	i;
+
+		puts("hey im here");
+	i = 0;
+	while (i < philos->data->number_of_philosophers)
+	{
+		pthread_join(philos[i].thread_philo, NULL);
+		i++;
+	}
+}
+
 void	*monitoring(void *arg)
 {
 	t_philo	*philo;
@@ -14,7 +27,9 @@ void	*monitoring(void *arg)
 		if (philo->data->arg == 6)
 		{
 			if (philo->cont > philo->data->must_eat)
+			{
 				exit(-1);
+			}
 		}
 		if (dure > philo->data->time_to_die)
 		{
@@ -60,6 +75,7 @@ void	start_simulation(t_data *data, t_philo *philo)
 		if (philo[i].pid == 0)
 		{
 			pthread_create(&philo[i].thread_philo, NULL, monitoring, &philo[i]);
+			pthread_detach(philo[i].thread_philo);
 			retine(&philo[i]);
 			exit(0);
 		}

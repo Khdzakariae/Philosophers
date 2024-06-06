@@ -1,6 +1,8 @@
 
 #include <philo_bonus.h>
 
+
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -18,12 +20,16 @@ int	main(int argc, char **argv)
 		status = waitpid(-1, &status, 0);
 		if (status == -1)
 		{
+			puts("++++++++++++++++++++");
+
 			free(philo);
 			exit(22);
 		}
 		else
 		{
+			puts("==================");
 			arrete(philo);
+			free(philo);
 			exit(1);
 		}
 	}

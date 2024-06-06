@@ -1,6 +1,9 @@
 #ifndef PHILO_BONNUS_H
 # define PHILO_BONNUS_H
 
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <fcntl.h>
 # include <limits.h>
 # include <pthread.h>
 # include <semaphore.h>
