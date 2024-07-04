@@ -4,13 +4,17 @@
 
 void	arrete(t_philo *philo)
 {
-	int	i;
-
-	i = 0;
-	while (i < philo->data->number_of_philosophers)
+	int i;
+	bool run = true;
+	while (run)
 	{
-		kill(philo[i].pid, SIGKILL);
-		i++;
+		i = 0;
+		while (i < philo->data->number_of_philosophers)
+		{
+			kill(philo[i].pid, SIGINT);
+			i++;
+		}
+		run = false;
 	}
 }
 
@@ -50,13 +54,15 @@ t_philo	*initialize_philosophers(t_data *data)
 		return (NULL);
 	sem_unlink("/mysemaphore");
 	sem_unlink("/mysemaphore1");
+	sem_unlink("/protect_count");
 	data->semaphore = (sem_open("/mysemaphore", O_CREAT, 0644,
 				data->number_of_philosophers));
 	data->semaphore1 = (sem_open("/mysemaphore1", O_CREAT, 0644, 1));
+	data->protect_count = (sem_open("/protect_count", O_CREAT, 0644, 1));
 	while (i < data->number_of_philosophers)
 	{
 		philo[i].id = i;
-		philo[i].cont = 0;
+		philo[i].cont = 1;
 		philo[i].data = data;
 		philo[i].time_to_last_eat = 0;
 		i++;

@@ -29,6 +29,7 @@ typedef struct s_data
 	bool		philosopher_died;
 	sem_t		*semaphore1;
 	sem_t		*semaphore;
+	sem_t		*protect_last_eat;
 	sem_t		*protect_count;
 
 }				t_data;
