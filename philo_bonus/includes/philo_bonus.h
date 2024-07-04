@@ -1,8 +1,18 @@
-#ifndef PHILO_BONNUS_H
-# define PHILO_BONNUS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/04 18:40:12 by zel-khad          #+#    #+#             */
+/*   Updated: 2024/07/04 18:40:46 by zel-khad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# include <sys/types.h>
-# include <sys/wait.h>
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
+
 # include <fcntl.h>
 # include <limits.h>
 # include <pthread.h>
@@ -13,6 +23,8 @@
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <sys/time.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <time.h>
 # include <unistd.h>
 
@@ -36,7 +48,7 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	pid_t			pid;
+	pid_t		pid;
 	long		id;
 	long		time_to_last_eat;
 	long		cont;
