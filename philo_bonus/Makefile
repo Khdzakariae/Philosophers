@@ -4,6 +4,8 @@ INCLUDES = -I "includes/"
 
 # FLAGS = -Wall -Wextra -Werror  
 FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
+# FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+
 
 
 SRC_PHILO__BONUS = sources/philosopuers_bonus.c sources/parse_argumants.c sources/utils.c \
