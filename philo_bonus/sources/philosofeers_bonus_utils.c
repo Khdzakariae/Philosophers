@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosofeers_bonus_utils.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/04 18:41:50 by zel-khad          #+#    #+#             */
+/*   Updated: 2024/07/04 18:41:51 by zel-khad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <philo_bonus.h>
-
-
 
 void	arrete(t_philo *philo)
 {
-	int i;
-	bool run = true;
+	int		i;
+	bool	run;
+
+	run = true;
 	while (run)
 	{
 		i = 0;
@@ -57,13 +69,11 @@ t_philo	*initialize_philosophers(t_data *data)
 	sem_unlink("/mysemaphore1");
 	sem_unlink("/protect_count");
 	sem_unlink("/protect_last_eat");
-
 	data->semaphore = (sem_open("/mysemaphore", O_CREAT, 0644,
 				data->number_of_philosophers));
 	data->semaphore1 = (sem_open("/mysemaphore1", O_CREAT, 0644, 1));
 	data->protect_count = (sem_open("/protect_count", O_CREAT, 0644, 1));
 	data->protect_last_eat = (sem_open("/protect_last_eat", O_CREAT, 0644, 1));
-
 	while (i < data->number_of_philosophers)
 	{
 		philo[i].id = i;
