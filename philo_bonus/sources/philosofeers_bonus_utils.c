@@ -27,6 +27,7 @@ void	print_msg(int flag, t_philo *philo, bool flage)
 	if (flage == false)
 	{
 		printf("%lld\t%ld died\n", time, philo->id + 1);
+		sem_post(philo->data->semaphore1);
 		return ;
 	}
 	else
@@ -55,10 +56,14 @@ t_philo	*initialize_philosophers(t_data *data)
 	sem_unlink("/mysemaphore");
 	sem_unlink("/mysemaphore1");
 	sem_unlink("/protect_count");
+	sem_unlink("/protect_last_eat");
+
 	data->semaphore = (sem_open("/mysemaphore", O_CREAT, 0644,
 				data->number_of_philosophers));
 	data->semaphore1 = (sem_open("/mysemaphore1", O_CREAT, 0644, 1));
 	data->protect_count = (sem_open("/protect_count", O_CREAT, 0644, 1));
+	data->protect_last_eat = (sem_open("/protect_last_eat", O_CREAT, 0644, 1));
+
 	while (i < data->number_of_philosophers)
 	{
 		philo[i].id = i;
