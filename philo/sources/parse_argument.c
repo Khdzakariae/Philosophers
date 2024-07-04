@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_argument.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/02 18:08:45 by zel-khad          #+#    #+#             */
+/*   Updated: 2024/06/03 09:34:17 by zel-khad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_isdigit(int c)
@@ -44,7 +56,7 @@ long	ft_atoi(char *str)
 	return (result * sign);
 }
 
-bool	cheack(t_data *data, char **av , int argc)
+bool	cheack(t_data *data, char **av, int argc)
 {
 	data->number_of_philosophers = ft_atoi(av[1]);
 	if (data->number_of_philosophers <= 0)
@@ -62,8 +74,9 @@ bool	cheack(t_data *data, char **av , int argc)
 	{
 		data->must_eat = ft_atoi(av[5]);
 		if (data->must_eat > INT_MAX)
-			return(false);
+			return (false);
 	}
+	data->philosopher_died = false;
 	data->time_to_died = 0;
 	return (true);
 }
@@ -72,7 +85,7 @@ int	check_arguments(int argc, char **argv, t_data *data)
 {
 	if (argc == 5 || argc == 6)
 	{
-		if (!cheack(data, argv , argc))
+		if (!cheack(data, argv, argc))
 		{
 			printf("ERROR\n");
 			return (1);
@@ -80,7 +93,7 @@ int	check_arguments(int argc, char **argv, t_data *data)
 	}
 	else
 	{
-		printf("Usage:%s \n",argv[0]);
+		printf("Usage:%s \n", argv[0]);
 		return (1);
 	}
 	return (0);
