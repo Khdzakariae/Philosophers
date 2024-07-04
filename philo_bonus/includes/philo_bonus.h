@@ -29,12 +29,13 @@ typedef struct s_data
 	bool		philosopher_died;
 	sem_t		*semaphore1;
 	sem_t		*semaphore;
+	sem_t		*protect_count;
 
 }				t_data;
 
 typedef struct s_philo
 {
-	int			pid;
+	pid_t			pid;
 	long		id;
 	long		time_to_last_eat;
 	long		cont;
