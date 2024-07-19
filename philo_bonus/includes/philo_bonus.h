@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:40:12 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/04 18:40:46 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/19 19:17:46 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ typedef struct s_data
 	long		time_to_eat;
 	long		time_to_sleep;
 	long		must_eat;
+	long		cont;
 	long		start_time;
 	bool		philosopher_died;
-	sem_t		*semaphore1;
-	sem_t		*semaphore;
+	sem_t		*forks_semaphore;
+	sem_t		*cont_semaphore;
+	sem_t		*semaphore_print;
+	sem_t		*semaphore_died;
 	sem_t		*protect_last_eat;
-	sem_t		*protect_count;
 
 }				t_data;
 
@@ -51,15 +53,20 @@ typedef struct s_philo
 	pid_t		pid;
 	long		id;
 	long		time_to_last_eat;
-	long		cont;
 	t_data		*data;
 	pthread_t	thread_philo;
 }				t_philo;
 
-bool			cheaak_died(t_philo *philo);
+
 void			set_philo_died(t_philo *philo);
-void			arrete(t_philo *philo);
+void			set_cont(t_philo *philo);
 void			set_time(t_philo *philo);
+
+bool			cheack_time_died(t_philo *philos);
+bool			cheack_cont(t_philo *philo);
+bool			cheaak_died(t_philo *philo);
+
+void			arrete(t_philo *philo);
 long			start_time(bool init);
 long			the_time(void);
 void			ft_usleep(long time);

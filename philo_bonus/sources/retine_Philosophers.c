@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:42:00 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/04 18:52:04 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/19 19:50:09 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,19 @@ void	*monitoring(void *arg)
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		sem_wait(philo->data->protect_count);
-		if ((the_time() - philo->time_to_last_eat) > philo->data->time_to_die)
+		if (philo->data->arg == 6 && cheack_cont(philo) == false)
 		{
-			philo->data->philosopher_died = true;
+			pthread_join(philo->thread_philo, NULL);
+			exit(0);
+		}
+		if (cheack_time_died(philo) == false)
+		{
+			set_philo_died(philo);
 			print_msg(3, philo, false);
 			arrete(philo);
-			sem_post(philo->data->protect_count);
-			exit(1);
 		}
-		if (philo->data->arg == 6)
-		{
-			if ((philo->cont) >= (philo->data->must_eat - 1))
-			{
-				sem_post(philo->data->protect_count);
-				exit(0);
-			}
-		}
-		sem_post(philo->data->protect_count);
 	}
+	return(NULL);
 }
 
 void	retine(t_philo *philo)
@@ -58,21 +52,19 @@ void	retine(t_philo *philo)
 		usleep(100);
 	while (1)
 	{
+		if (philo->data->arg == 6 && cheack_cont(philo) == false)
+			exit(0);
 		thinking(philo);
-		sem_wait(philo->data->semaphore);
+		sem_wait(philo->data->forks_semaphore);
 		print_msg(0, philo, true);
-		sem_wait(philo->data->semaphore);
+		sem_wait(philo->data->forks_semaphore);
 		print_msg(0, philo, true);
-		sem_wait(philo->data->protect_count);
-		philo->time_to_last_eat = the_time();
-		sem_post(philo->data->protect_count);
+		set_time(philo);
 		print_msg(4, philo, true);
-		sem_wait(philo->data->protect_count);
-		philo->cont++;
-		sem_post(philo->data->protect_count);
 		ft_usleep(philo->data->time_to_eat);
-		sem_post(philo->data->semaphore);
-		sem_post(philo->data->semaphore);
+		set_cont(philo);
+		sem_post(philo->data->forks_semaphore);
+		sem_post(philo->data->forks_semaphore);
 		print_msg(1, philo, true);
 		ft_usleep(philo->data->time_to_sleep);
 		usleep(300);
