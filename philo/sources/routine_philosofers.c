@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:09:04 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/22 15:53:44 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:33:52 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	monitoring(t_philo *philos, int ac)
 				if (cheack_cont(philos) == false)
 				{
 					set_philo_died(philos);
-					return (false);
+					return (true);
 				}
 			}
 			if (cheack_time_died(philos) == false)
@@ -62,7 +62,7 @@ void	*philosophers(void *arg)
 		usleep(20);
 	while (1)
 	{
-		if (cheaak_died(philo) == false)
+		if (cheaak_died(philo) == false || cheack_cont(philo) == false)
 			break ;
 		if (philo->data->number_of_philosophers == 1)
 		{
