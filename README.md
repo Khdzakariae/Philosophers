@@ -1,4 +1,4 @@
-# Dining Philosopher Problem Using Semaphores
+# - Dining Philosopher Problem Using Semaphores
 
 ---
 
