@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:19:24 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/06/03 20:55:13 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:27:35 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	cheaak_died(t_philo *philo)
 bool	cheack_cont(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->cont_mutix);
-	if (philo->cont > philo->data->must_eat + 1)
+	if (philo->cont > philo->data->must_eat)
 	{
 		pthread_mutex_unlock(&philo->data->cont_mutix);
 		return (false);

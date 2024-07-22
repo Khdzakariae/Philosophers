@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:08:45 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/22 15:55:44 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:24:28 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	cheack(t_data *data, char **av, int argc)
 	if (argc == 6)
 	{
 		data->must_eat = ft_atoi(av[5]);
-		if (data->must_eat > INT_MAX)
+		if (data->must_eat > INT_MAX || data->must_eat == 0)
 			return (false);
 	}
 	data->philosopher_died = false;
