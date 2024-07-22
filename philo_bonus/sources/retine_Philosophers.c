@@ -43,7 +43,7 @@ void	*monitoring(void *arg)
 			arrete(philo);
 		}
 	}
-	return(NULL);
+	return (NULL);
 }
 
 void	retine(t_philo *philo)
