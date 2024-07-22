@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:39:31 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/19 19:21:25 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:52:03 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ bool	cheack_time_died(t_philo *philos)
 	dure = current_time - philos->time_to_last_eat;
 	if (dure >= philos->data->time_to_die)
 	{
-	    sem_post(philos->data->protect_last_eat); 
+		sem_post(philos->data->protect_last_eat);
 		return (false);
 	}
-	sem_post(philos->data->protect_last_eat);  
+	sem_post(philos->data->protect_last_eat);
 	return (true);
 }
