@@ -1,7 +1,7 @@
 NAME = philo
-# FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
+FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
 # FLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
-FLAGS = -Wall -Wextra -Werror 
+# FLAGS = -Wall -Wextra -Werror 
 
 
 INCLUDES = -I "includes/"
