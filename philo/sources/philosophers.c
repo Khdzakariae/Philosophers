@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:09:00 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/06/03 09:48:27 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:33:33 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(int argc, char **argv)
 	start_simulation(&data, philo);
 	if (monitoring(philo, argc) == false)
 	{
-		if (data.number_of_philosophers != 1)
-			join_threads(philo);
+		// if (data.number_of_philosophers != 1)
+		join_threads(philo);
 		cleanup(philo, forks, data.number_of_philosophers);
 		return (1);
 	}

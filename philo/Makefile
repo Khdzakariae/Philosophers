@@ -1,6 +1,7 @@
 NAME = philo
+FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
+# FLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
-FLAGS = -Wall -Wextra -Werror
 
 INCLUDES = -I "includes/"
 
@@ -14,7 +15,7 @@ all: $(NAME)
 
 
 $(NAME): $(SRC_PHILO)
-	@cc  -fsanitize=thread  $^  $(FLAGS) $(INCLUDES) -o philo
+	@cc   $^  $(FLAGS) $(INCLUDES) -o philo
 
 clean:
 	@echo "clean [ ✅ ]"

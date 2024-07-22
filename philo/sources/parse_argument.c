@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:08:45 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/06/03 09:34:17 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:55:44 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,7 @@ int	check_arguments(int argc, char **argv, t_data *data)
 	if (argc == 5 || argc == 6)
 	{
 		if (!cheack(data, argv, argc))
-		{
-			printf("ERROR\n");
 			return (1);
-		}
 	}
 	else
 	{

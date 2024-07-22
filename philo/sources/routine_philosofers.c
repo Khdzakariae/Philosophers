@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:09:04 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/06/03 20:52:45 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:53:44 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ void	*philosophers(void *arg)
 	{
 		if (cheaak_died(philo) == false)
 			break ;
+		if (philo->data->number_of_philosophers == 1)
+		{
+			
+			pthread_mutex_lock(philo->first_fork->forks);
+			print_msg(0, philo, true);
+			ft_usleep(philo->data->time_to_sleep);
+			pthread_mutex_unlock(philo->first_fork->forks);
+			return NULL;
+		}
 		thinking(philo);
 		if (philo->id % 2 != 0)
 		{
