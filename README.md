@@ -3,7 +3,7 @@
 ---
 
 
-<div align="center"><img src="1_WYw1_AHCq3A4RM5Dh01usg.gif" /></div>
+<div align="center"><img src=".1_WYw1_AHCq3A4RM5Dh01usg.gif" /></div>
 
 
 ## There are 5 philosophers sitting around a round table eating spaghetti and each of them has one chopstick between them. All 5 of them sit around the table and pick up the chopstick placed towards their right. But, here’s the problem. To eat the spaghetti they need both the chopsticks and since everyone picked up the chopstick to their right, nobody gets the left chopstick and hence, nobody can eat.
