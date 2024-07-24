@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:42:00 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/19 19:50:09 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:10:55 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	*monitoring(void *arg)
 		if (cheack_time_died(philo) == false)
 		{
 			set_philo_died(philo);
-			print_msg(3, philo, false);
-			arrete(philo);
+			// print_msg(3, philo, false);
+			// arrete(philo);
+			exit(philo->id + 1);
 		}
 	}
 	return (NULL);
@@ -71,6 +72,8 @@ void	retine(t_philo *philo)
 	}
 }
 
+// arg 6 exit 0 ===> wait
+// time to die ===> killall
 void	start_simulation(t_data *data, t_philo *philo)
 {
 	int	i;
@@ -80,19 +83,21 @@ void	start_simulation(t_data *data, t_philo *philo)
 	while (i < data->number_of_philosophers)
 	{
 		philo[i].pid = fork();
+		// printf("------------> |%d|",philo[i].pid);
 		if (philo[i].pid == 0)
-		{
+		{	
 			pthread_create(&philo[i].thread_philo, NULL, monitoring, &philo[i]);
+			pthread_detach(philo[i].thread_philo);
 			retine(&philo[i]);
-			pthread_join(philo[i].thread_philo, NULL);
 			exit(0);
 		}
 		i++;
 	}
-	i = 0;
-	while (i < philo->data->number_of_philosophers)
-	{
-		wait(NULL);
-		i++;
-	}
+	// i = 0;
+	// while( wait(NULL) != -1);
+	// while (i < philo->data->number_of_philosophers)
+	// {
+	// 	wait(NULL);
+	// 	i++;
+	// }
 }
