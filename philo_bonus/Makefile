@@ -2,8 +2,8 @@ NAME_BONUS = philo_bonus
 
 INCLUDES = -I "includes/"
 
-# FLAGS = -Wall -Wextra -Werror  
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
+FLAGS = -Wall -Wextra -Werror  
+# FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
 # FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 
