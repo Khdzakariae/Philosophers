@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:41:50 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/22 19:50:27 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:36:04 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,13 @@
 void	arrete(t_philo *philo)
 {
 	int		i;
-	bool	run;
-
-	run = true;
-	while (run)
-	{
 		i = 0;
 		while (i < philo->data->number_of_philosophers)
 		{
-			kill(philo[i].pid, SIGINT);
+			// printf("the pis is --> |%d|\n", philo[i].pid);
+			kill(philo[i].pid, SIGKILL);
 			i++;
 		}
-		run = false;
-	}
 }
 
 void	print_msg(int flag, t_philo *philo, bool flage)
@@ -38,9 +32,10 @@ void	print_msg(int flag, t_philo *philo, bool flage)
 	time = the_time();
 	if (flage == false)
 	{
+		// puts("================");
 		printf("%lld\t%ld died\n", time, philo->id + 1);
 		sem_post(philo->data->semaphore_print);
-		return ;
+		return;
 	}
 	if (flage == true)
 	{
