@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:40:12 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/24 19:00:19 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/29 10:59:01 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data
 	long		start_time;
 	bool		philosopher_died;
 	sem_t		*forks_semaphore;
+	sem_t		*maaat;
 	sem_t		*cont_semaphore;
 	sem_t		*semaphore_print;
 	sem_t		*semaphore_died;
