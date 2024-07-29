@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:40:12 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/29 10:59:01 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/29 12:00:49 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_data
 	bool		philosopher_died;
 	sem_t		*forks_semaphore;
 	sem_t		*maaat;
+	sem_t		*chbaa3;
 	sem_t		*cont_semaphore;
 	sem_t		*semaphore_print;
 	sem_t		*semaphore_died;
@@ -57,7 +58,6 @@ typedef struct s_philo
 	t_data		*data;
 	pthread_t	thread_philo;
 }				t_philo;
-
 
 void			set_philo_died(t_philo *philo);
 void			set_cont(t_philo *philo);
