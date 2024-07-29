@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:39:31 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/29 11:34:10 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/29 12:21:44 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	cheaak_died(t_philo *philo)
 	sem_wait(philo->data->semaphore_died);
 	if (philo->data->philosopher_died == true)
 	{
-		philo->data->semaphore_died->__align = 2;
+		sem_post(philo->data->semaphore_died);
 		return (false);
 	}
 	sem_post(philo->data->semaphore_died);
@@ -27,7 +27,7 @@ bool	cheaak_died(t_philo *philo)
 bool	cheack_cont(t_philo *philo)
 {
 	sem_wait(philo->data->cont_semaphore);
-	if (philo->data->cont >= philo->data->must_eat)
+	if (philo->data->cont > philo->data->must_eat)
 	{
 		sem_post(philo->data->cont_semaphore);
 		return (false);
