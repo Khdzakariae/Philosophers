@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:41:50 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/29 12:39:01 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:11:17 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,8 @@ void	print_msg(int flag, t_philo *philo, bool flage)
 	sem_post(philo->data->semaphore_print);
 }
 
-t_philo	*initialize_philosophers(t_data *data)
+void	open_semphores(t_data *data)
 {
-	int		i;
-	t_philo	*philo;
-
-	i = 0;
-	philo = malloc((data->number_of_philosophers) * sizeof(t_philo));
 	sem_unlink("/forks_semaphore");
 	sem_unlink("/cont_semaphore");
 	sem_unlink("/semaphore_print");
@@ -63,6 +58,16 @@ t_philo	*initialize_philosophers(t_data *data)
 	data->protect_last_eat = (sem_open("/protect_last_eat", O_CREAT, 0644, 1));
 	data->maaat = (sem_open("/maaat", O_CREAT, 0644, 1));
 	data->chbaa3 = (sem_open("/chbaa3", O_CREAT, 0644, 1));
+}
+
+t_philo	*initialize_philosophers(t_data *data)
+{
+	int		i;
+	t_philo	*philo;
+
+	i = 0;
+	philo = malloc((data->number_of_philosophers) * sizeof(t_philo));
+	open_semphores(data);
 	data->philosopher_died = false;
 	data->cont = 0;
 	while (i < data->number_of_philosophers)
