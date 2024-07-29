@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:09:04 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/28 17:55:32 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:27:05 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,40 @@ bool	monitoring(t_philo *philos, int ac)
 	return (true);
 }
 
+void	manage_forks_and_eat(t_philo *philo)
+{
+	if (philo->id % 2 != 0)
+	{
+		pthread_mutex_lock(philo->first_fork->forks);
+		print_msg(0, philo, true);
+		pthread_mutex_lock(philo->second_fork->forks);
+		print_msg(0, philo, true);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->second_fork->forks);
+		print_msg(0, philo, true);
+		pthread_mutex_lock(philo->first_fork->forks);
+		print_msg(0, philo, true);
+	}
+	print_msg(4, philo, true);
+	set_time(philo);
+	ft_usleep(philo->data->time_to_eat);
+	set_cont(philo);
+	pthread_mutex_unlock(philo->second_fork->forks);
+	pthread_mutex_unlock(philo->first_fork->forks);
+	sleping(philo);
+	usleep(300);
+}
+
+void	handle_single_philosopher(t_philo *philo)
+{
+	pthread_mutex_lock(philo->first_fork->forks);
+	print_msg(0, philo, true);
+	ft_usleep(philo->data->time_to_sleep);
+	pthread_mutex_unlock(philo->first_fork->forks);
+}
+
 void	*philosophers(void *arg)
 {
 	t_philo	*philo;
@@ -66,51 +100,11 @@ void	*philosophers(void *arg)
 			break ;
 		if (philo->data->number_of_philosophers == 1)
 		{
-			
-			pthread_mutex_lock(philo->first_fork->forks);
-			print_msg(0, philo, true);
-			ft_usleep(philo->data->time_to_sleep);
-			pthread_mutex_unlock(philo->first_fork->forks);
-			return NULL;
+			handle_single_philosopher(philo);
+			return (NULL);
 		}
 		thinking(philo);
-		if (philo->id % 2 != 0)
-		{
-			pthread_mutex_lock(philo->first_fork->forks);
-			print_msg(0, philo, true);
-			pthread_mutex_lock(philo->second_fork->forks);
-			print_msg(0, philo, true);
-		}
-		else
-		{
-			pthread_mutex_lock(philo->second_fork->forks);
-			print_msg(0, philo, true);
-			pthread_mutex_lock(philo->first_fork->forks);
-			print_msg(0, philo, true);
-			
-		}
-		print_msg(4, philo, true);
-		set_time(philo);
-		ft_usleep(philo->data->time_to_eat);
-		set_cont(philo);
-		pthread_mutex_unlock(philo->second_fork->forks);
-		pthread_mutex_unlock(philo->first_fork->forks);
-		sleping(philo);
-		usleep(300);
+		manage_forks_and_eat(philo);
 	}
 	return (NULL);
-}
-
-void	start_simulation(t_data *data, t_philo *philos)
-{
-	int	i;
-
-	i = 0;
-	start_time(true);
-	data->start_time = the_time();
-	while (i < data->number_of_philosophers)
-	{
-		pthread_create(&philos[i].thread_philo, NULL, philosophers, &philos[i]);
-		i++;
-	}
 }
