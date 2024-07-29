@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:42:00 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/24 19:10:55 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/29 11:48:12 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	join_threads(t_philo *philos)
 void	*monitoring(void *arg)
 {
 	t_philo	*philo;
-
 	philo = (t_philo *)arg;
+
 	while (1)
 	{
 		if (philo->data->arg == 6 && cheack_cont(philo) == false)
@@ -39,12 +39,12 @@ void	*monitoring(void *arg)
 		if (cheack_time_died(philo) == false)
 		{
 			set_philo_died(philo);
-			// print_msg(3, philo, false);
-			// arrete(philo);
-			exit(philo->id + 1);
+			sem_wait(philo->data->maaat);
+			print_msg(0, philo,false);
 		}
+		usleep(100);
 	}
-	return (NULL);
+	exit(0);
 }
 
 void	retine(t_philo *philo)
@@ -53,6 +53,8 @@ void	retine(t_philo *philo)
 		usleep(100);
 	while (1)
 	{
+		if(cheaak_died(philo) == false)
+			exit(0);
 		if (philo->data->arg == 6 && cheack_cont(philo) == false)
 			exit(0);
 		thinking(philo);
@@ -70,10 +72,9 @@ void	retine(t_philo *philo)
 		ft_usleep(philo->data->time_to_sleep);
 		usleep(300);
 	}
+
 }
 
-// arg 6 exit 0 ===> wait
-// time to die ===> killall
 void	start_simulation(t_data *data, t_philo *philo)
 {
 	int	i;
@@ -83,21 +84,11 @@ void	start_simulation(t_data *data, t_philo *philo)
 	while (i < data->number_of_philosophers)
 	{
 		philo[i].pid = fork();
-		// printf("------------> |%d|",philo[i].pid);
 		if (philo[i].pid == 0)
 		{	
 			pthread_create(&philo[i].thread_philo, NULL, monitoring, &philo[i]);
-			pthread_detach(philo[i].thread_philo);
 			retine(&philo[i]);
-			exit(0);
 		}
 		i++;
 	}
-	// i = 0;
-	// while( wait(NULL) != -1);
-	// while (i < philo->data->number_of_philosophers)
-	// {
-	// 	wait(NULL);
-	// 	i++;
-	// }
 }
