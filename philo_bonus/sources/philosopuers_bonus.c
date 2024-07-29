@@ -6,11 +6,41 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:41:56 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/24 19:38:41 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/29 11:49:29 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_bonus.h>
+
+void main_monitor(t_philo *philo)
+{
+	while (1)
+	{
+		if(philo->data->maaat->__align == 0)
+		{
+			break;
+		}
+	}
+}
+
+void	arrete(t_philo *philo)
+{
+		int		i;
+		i = 0;
+		while (i < philo->data->number_of_philosophers)
+		{
+			kill(philo[i].pid, SIGKILL);
+			i++;
+		}
+		sem_close(philo->data->forks_semaphore);
+   		sem_close(philo->data->cont_semaphore);
+   	 	sem_close(philo->data->semaphore_print);
+    	sem_close(philo->data->semaphore_died);
+    	sem_close(philo->data->protect_last_eat);
+    	sem_close(philo->data->maaat);
+		free(philo);
+		exit(1);
+}
 
 int	main(int argc, char **argv)
 {
@@ -23,40 +53,7 @@ int	main(int argc, char **argv)
 	if (philo == NULL)
 		return (1);
 	start_simulation(&data, philo);
-	
-	while (1) {
-
-	int status;
-	int ret = waitpid(-1, &status, 0);
-	if (ret == -1) 
-		{
-		
-    sem_close(philo->data->forks_semaphore);
-    sem_close(philo->data->cont_semaphore);
-    sem_close(philo->data->semaphore_print);
-    sem_close(philo->data->semaphore_died);
-    sem_close(philo->data->protect_last_eat);
-				free(philo);
-			exit(122);
-		}
-
-    	// if (WIFEXITED(status)) {
-		if (WEXITSTATUS(status) == 0) {
-				continue;
-		} 
-		else if (WEXITSTATUS(status) != 0) {
-				arrete(philo);
-				print_msg(3, &philo[WEXITSTATUS(status)  - 1], false);
-
-	    sem_close(philo->data->forks_semaphore);
-    sem_close(philo->data->cont_semaphore);
-    sem_close(philo->data->semaphore_print);
-    sem_close(philo->data->semaphore_died);
-    sem_close(philo->data->protect_last_eat);
-				free(philo);
-
-				// exit(10);
-		}
-	}
-	
+	main_monitor(philo);
+	arrete(philo);
+	return (0);
 }
