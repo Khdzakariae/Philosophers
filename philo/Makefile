@@ -1,5 +1,5 @@
 NAME = philo
-# FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
+FLAGS = -Wall -Wextra -Werror -fsanitize=thread -g3
 # FLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 # FLAGS = -Wall -Wextra -Werror 
 
