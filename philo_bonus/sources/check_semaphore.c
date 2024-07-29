@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 09:39:31 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/22 19:52:03 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/29 11:34:10 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	cheaak_died(t_philo *philo)
 	sem_wait(philo->data->semaphore_died);
 	if (philo->data->philosopher_died == true)
 	{
-		sem_post(philo->data->semaphore_died);
+		philo->data->semaphore_died->__align = 2;
 		return (false);
 	}
 	sem_post(philo->data->semaphore_died);
