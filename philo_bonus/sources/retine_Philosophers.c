@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:42:00 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/29 12:35:06 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/29 18:33:28 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	*monitoring(void *arg)
 			sem_wait(philo->data->semaphore_print);
 			break ;
 		}
-		usleep(200);
 	}
-	set_philo_died(philo);
 	sem_wait(philo->data->maaat);
-	print_msg(15, philo, false);
+	set_philo_died(philo);
+	printf("%ld\t%ld died\n", the_time(), philo->id + 1);
+	sleep(10);
 	exit(0);
 }
 
