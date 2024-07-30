@@ -6,7 +6,7 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:41:45 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/04 18:42:21 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:06:09 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ bool	cheack(t_data *data, char **av, int argc)
 	if (data->number_of_philosophers <= 0)
 		return (false);
 	data->time_to_die = ft_atoi(av[2]);
-	if (data->time_to_die > INT_MAX || data->time_to_die < 60)
+	if (data->time_to_die > INT_MAX)
 		return (false);
 	data->time_to_eat = ft_atoi(av[3]);
-	if (data->time_to_eat > INT_MAX || data->time_to_eat < 60)
+	if (data->time_to_eat > INT_MAX)
 		return (false);
 	data->time_to_sleep = ft_atoi(av[4]);
-	if (data->time_to_sleep > INT_MAX || data->time_to_sleep < 60)
+	if (data->time_to_sleep > INT_MAX)
 		return (false);
 	if (argc == 6)
 	{
@@ -87,7 +87,6 @@ int	check_arguments(int argc, char **argv, t_data *data)
 	{
 		if (!cheack(data, argv, argc))
 		{
-			printf("ERROR\n");
 			return (1);
 		}
 	}
