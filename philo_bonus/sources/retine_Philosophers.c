@@ -6,23 +6,11 @@
 /*   By: zel-khad <zel-khad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:42:00 by zel-khad          #+#    #+#             */
-/*   Updated: 2024/07/29 18:33:28 by zel-khad         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:04:33 by zel-khad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo_bonus.h>
-
-void	join_threads(t_philo *philos)
-{
-	int	i;
-
-	i = 0;
-	while (i < philos->data->number_of_philosophers)
-	{
-		pthread_join(philos[i].thread_philo, NULL);
-		i++;
-	}
-}
 
 void	*monitoring(void *arg)
 {
@@ -34,11 +22,12 @@ void	*monitoring(void *arg)
 		if (philo->data->arg == 6 && cheack_cont(philo) == false)
 		{
 			sem_wait(philo->data->chbaa3);
-			sem_wait(philo->data->semaphore_print);
+			sleep(10);
 			break ;
 		}
 	}
 	sem_wait(philo->data->maaat);
+	sem_wait(philo->data->semaphore_print);
 	set_philo_died(philo);
 	printf("%ld\t%ld died\n", the_time(), philo->id + 1);
 	sleep(10);
